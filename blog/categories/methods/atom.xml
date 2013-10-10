@@ -4,7 +4,7 @@
   <title><![CDATA[Category: methods | stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/blog/categories/methods/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-09T22:58:19-04:00</updated>
+  <updated>2013-10-09T23:05:32-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -32,7 +32,7 @@
 
 <p>Even if you&rsquo;re still having a hard time grasping how crucial this idea is, or if you don&rsquo;t know the first thing about writing code, any layperson with a pair of eyes can see the stark differences between the following two examples of code.</p>
 
-<h5>Here's the first version:</h5>
+<h4>Here's the first version:</h4>
 
 
 <p>``` ruby
@@ -84,7 +84,7 @@ end
 <p>  end
 ```</p>
 
-<h5>Here's the second version (of the same program):</h5>
+<h4>Here's the second version (of the same program):</h4>
 
 
 <p>``` ruby
