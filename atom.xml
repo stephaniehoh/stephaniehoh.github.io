@@ -4,7 +4,7 @@
   <title><![CDATA[stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-09T22:48:42-04:00</updated>
+  <updated>2013-10-09T22:58:19-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -12,6 +12,322 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Keeping Your Units of Work Manageable]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/10/09/keeping-your-units-of-work-manageable/"/>
+    <updated>2013-10-09T00:33:00-04:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/10/09/keeping-your-units-of-work-manageable</id>
+    <content type="html"><![CDATA[<p>The parallels between good (English) writing and good code continue to abound, and one that really stood out to me today was the idea that <strong>methods are like paragraphs</strong>.</p>
+
+<p>Just think about it.</p>
+
+<p>Any work of writing worth your dime (screenplays and plays don&rsquo;t really count in this example) &mdash; be it an op-ed piece, a serious article, or a novel &mdash; can be broken down into smaller and smaller units until you&rsquo;re staring at individual letters and punctuation marks. Now, a slightly more meaningful unit of work than individual letters and characters is a sentence, and I&rsquo;d say the next unit up after a sentence is by and large the most meaningful of all: the paragraph.</p>
+
+<p>Aside from needing to be well-written in general, conceptually, good paragraphs should <strong>adhere to a single topic</strong>. That is the point of a paragraph: to broach, discuss, debate, or refute ONE MAIN IDEA. And if you find yourself babbling about new or irrelevant ideas, it&rsquo;s probably time for &mdash; you guessed it &mdash; a new paragraph. Paragraphs help us compartmentalize our thoughts so we can build upon them in a logical manner; they&rsquo;re kind of like lego pieces that we can eventually stack together to build something cool. Conversely, how could you build anything <em>without</em> these pieces?? I HAVE NO IDEA. How miffed would you be if you had to build a house with one massive brick? Or how pissed have I been when previous writing students submitted &ldquo;papers&rdquo; that were comprised of ONE MASSIVE BLOCK OF TEXT?</p>
+
+<p>Paragraphs make your work &mdash; as both the writer AND the reader &mdash; more manageable. And I think this is such a key concept in writing code, as well.</p>
+
+<p>Methods, like paragraphs, are units of work. And these units of work need to be kept manageable, so as to make your life as a programmer (and potential reader of other programmers&#8217; code) less painful. How are you going to debug effectively if you&rsquo;re staring at one massive block of code? How can you tell where your errors truly begin and end if your entire program depends on ONE GIANT CHAIN OF METHODS?? I don&rsquo;t know.</p>
+
+<p>Even if you&rsquo;re still having a hard time grasping how crucial this idea is, or if you don&rsquo;t know the first thing about writing code, any layperson with a pair of eyes can see the stark differences between the following two examples of code.</p>
+
+<h5>Here&#8217;s the first version:</h5>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Jukebox</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:songs</span>
+</span><span class='line'>  <span class="no">APPROVED_COMMANDS</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:list</span><span class="p">,</span> <span class="ss">:help</span><span class="p">,</span> <span class="ss">:exit</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">songs</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@songs</span> <span class="o">=</span> <span class="n">songs</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="no">Song</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">s</span><span class="p">)}</span>
+</span><span class='line'>    <span class="vi">@on</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">on?</span>
+</span><span class='line'>      <span class="vi">@on</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">help</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Please select help, list, exit, or play.&quot;</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">command_request</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="no">APPROVED_COMMANDS</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">input</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">to_sym</span><span class="p">)</span>
+</span><span class='line'>        <span class="nb">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">input</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s2">&quot;play&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">song_request</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;play&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">strip</span>
+</span><span class='line'>        <span class="nb">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">song_request</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Invalid command&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">call</span>
+</span><span class='line'>      <span class="k">while</span> <span class="nb">self</span><span class="o">.</span><span class="n">on?</span>
+</span><span class='line'>        <span class="nb">self</span><span class="o">.</span><span class="n">help</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">exit</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Goodbye!&quot;</span>
+</span><span class='line'>      <span class="vi">@on</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">command_request</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="nb">gets</span><span class="o">.</span><span class="n">strip</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h5>Here&#8217;s the second version (of the same program):</h5>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Jukebox</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:songs</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">songs</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@songs</span> <span class="o">=</span> <span class="n">songs</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">call</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Welcome to Pop Jukebox!&quot;</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Enter a command to continue. Type &#39;help&#39; for a list of commands.&quot;</span>
+</span><span class='line'>    <span class="nb">exit</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">while</span> <span class="nb">exit</span> <span class="o">==</span> <span class="kp">false</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">command</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">case</span> <span class="n">command</span>
+</span><span class='line'>      <span class="k">when</span> <span class="s1">&#39;help&#39;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Enter one of the following commands: help, play, list, exit&quot;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>      <span class="k">when</span> <span class="s1">&#39;list&#39;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="nb">self</span><span class="o">.</span><span class="n">songs</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Type play to proceed&quot;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>      <span class="k">when</span> <span class="s1">&#39;play&#39;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Would you like to play by song title or artist?&quot;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="n">song_title_or_artist</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="n">song_title_or_artist</span>
+</span><span class='line'>        <span class="k">when</span> <span class="s1">&#39;song title&#39;</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="n">list_song_titles</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s2">&quot;Please select a song&quot;</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>          <span class="n">song_choice</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>          <span class="n">play_song_choice</span><span class="p">(</span><span class="n">song_choice</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">when</span> <span class="s1">&#39;artist&#39;</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="n">list_artists</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s2">&quot;Please select an artist&quot;</span>
+</span><span class='line'>          <span class="n">artist_choice</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>          <span class="n">list_artist_songs</span><span class="p">(</span><span class="n">artist_choice</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">song_choice</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">downcase</span>
+</span><span class='line'>          <span class="n">play_song_choice</span><span class="p">(</span><span class="n">song_choice</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s2">&quot;Enter one of the following commands: help, play, list, exit&quot;</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">when</span> <span class="s1">&#39;exit&#39;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Goodbye! Nice to know ya.&quot;</span>
+</span><span class='line'>        <span class="nb">exit</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Say whaaaaaa?&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">list_artists</span>
+</span><span class='line'>    <span class="n">artists</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">songs</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">song</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span><span class="o">.</span><span class="n">uniq</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">list_song_titles</span>
+</span><span class='line'>    <span class="n">song_titles</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">songs</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">song</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_song_choice</span><span class="p">(</span><span class="n">song_choice</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">songs</span><span class="o">.</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">song</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">downcase</span> <span class="o">==</span> <span class="n">song_choice</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s2">&quot;Now playing </span><span class="si">#{</span><span class="n">song</span><span class="si">}</span><span class="s2">!&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">list_artist_songs</span><span class="p">(</span><span class="n">artist_choice</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">songs</span><span class="o">.</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">song</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">downcase</span> <span class="o">==</span> <span class="n">artist_choice</span>
+</span><span class='line'>       <span class="c1"># then just show that artist&#39;s song</span>
+</span><span class='line'>       <span class="nb">puts</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; - &quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Select song&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I mean, just from a VISUAL standpoint, it doesn&rsquo;t take rocket science to see that one of the two versions seems to be less&hellip; verbose. It seems to rely on small, focused methods that each serve a single purpose and are accessed/called upon by other methods, when needed. This is achieved through something called <strong>method delegation</strong>, where methods pass responsibility along from one to the next, initiating different parts of the program swiftly and efficiently.</p>
+
+<p>Of course, the responsibility of the fledgling Rubyist is to focus on &lsquo;making it work&rsquo; first, then worry about &lsquo;making it beautiful&rsquo;. But somehow, I think considering form and function both is a valuable approach as well. Because if you&rsquo;re thinking in small pieces, and you KNOW that writing code in small pieces is a good thing, then you should have no trouble&hellip; <em>writing code in small pieces</em>.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Methods are like paragraphs &mdash; give them one &lsquo;topic sentence&rsquo;, i.e function, at a time</li>
+<li>A paper written as one big block of text is egregious&hellip; and so is code that relies on one unwieldy method</li>
+<li>Make your methods small and focused &mdash; you can always call them in other methods!</li>
+<li>Method delegation is your friend</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Doing Things with Enumerables Using Verbs... Well, Methods]]></title>
