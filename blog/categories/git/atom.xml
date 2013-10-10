@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[stephanie writes code]]></title>
-  <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: git | stephanie writes code]]></title>
+  <link href="http://stephaniehoh.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
   <updated>2013-10-09T22:37:33-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
@@ -47,7 +47,7 @@
 
 <p>Then we get into merging and pushing and some advanced Git topics that I&rsquo;ll chronicle in future posts (when I&rsquo;ve actually wrapped my head around them). But this poses a natural segueway into GitHub.</p>
 
-<h3>COOL. NOW WHAT&#8217;S GITHUB?</h3>
+<h3>COOL. NOW WHAT'S GITHUB?</h3>
 
 
 <p>Remember how I said Git lives locally on your computer? Well, GitHub is the exact opposite: <strong>it lives remotely, on the Internet.</strong> That&rsquo;s right &mdash; as its name would suggest, GitHub is an online &lsquo;hub&rsquo; that some really smart dudes built so that programmers could share their code remotely and collaborate on projects at the same time. It&rsquo;s kind of like the flashstick/Dropbox analogy &mdash; sure, the flashstick was small and compact and mostly useful, but what if you wanted to access everything on your flashstick remotely? On the Internet? Especially if, like, you didn&rsquo;t have your flashstick with you?? Sorry, no can do. Until Dropbox came along! Suddenly, you could access ALL your files from any computer, as long as you had an Internet connection and as long as you&rsquo;d explicitly added those files to Dropbox! Similarly, I like to think that GitHub is to Git what Dropbox is to the flashstick (yes, I know this is an oversimplification but if you just think about the remote-access part of the analogy, it works).</p>
@@ -68,21 +68,6 @@
 <li>What you do locally on your computer doesn&rsquo;t just magically appear remotely online; you need to create the pathways and make the explicit commands</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello World. It's Stephanie.]]></title>
-    <link href="http://stephaniehoh.github.io/blog/2013/09/24/hello-world/"/>
-    <updated>2013-09-24T22:27:00-04:00</updated>
-    <id>http://stephaniehoh.github.io/blog/2013/09/24/hello-world</id>
-    <content type="html"><![CDATA[<p>I completed day two at the Flatiron School today. My head is spinning with all the new concepts and terminology I&rsquo;ve been trying to absorb from the last 48 hours &mdash; deploying, raking, branching, rebasing, adding, committing, and merging. Everything is sort of merging into git-soup, at the moment.</p>
-
-<p>But I learned some handy keyboard shortcuts that I can wrap my head&hellip; err, fingers around. Like command + tab to navigate around my open applications. And command + space to summon Spotlight. It sounds silly, but I didn&rsquo;t used to know these things. I&rsquo;ve learned more about my computer in the last two days than I ever have.</p>
-
-<p>Goodbye, track pad?</p>
-
-<p>Hello world.</p>
 ]]></content>
   </entry>
   
