@@ -20,7 +20,7 @@ Methods, like paragraphs, are units of work. And these units of work need to be 
 
 Even if you're still having a hard time grasping how crucial this idea is, or if you don't know the first thing about writing code, any layperson with a pair of eyes can see the stark differences between the following two examples of code.
 
-<h5>Here's the first version:</h5>
+<h4>Here's the first version:</h4>
 
 ``` ruby
 class Jukebox
@@ -69,7 +69,7 @@ class Jukebox
   end
 ```
 
-<h5>Here's the second version (of the same program):</h5>
+<h4>Here's the second version (of the same program):</h4>
 
 ``` ruby
 class Jukebox
