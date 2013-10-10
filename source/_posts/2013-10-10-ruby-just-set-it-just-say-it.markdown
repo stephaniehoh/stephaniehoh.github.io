@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ruby: Just Set It. Just Say It."
-date: 2013-10-09 23:11
+date: 2013-10-10 1:57
 comments: true
 categories: [ruby, setting variables, implicit returns]
 ---
