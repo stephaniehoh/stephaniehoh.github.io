@@ -4,7 +4,7 @@
   <title><![CDATA[Category: enumerables | stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/blog/categories/enumerables/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-09T22:42:04-04:00</updated>
+  <updated>2013-10-09T22:48:42-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -20,17 +20,17 @@
     <id>http://stephaniehoh.github.io/blog/2013/10/08/doing-things-with-enumerables-using-verbs-dot-dot-dot-well</id>
     <content type="html"><![CDATA[<p>A big thing for me as I make the transition away from my former life as an English and writing instructor is to make sense of coding by relating it to familiar concepts by means of analogy.</p>
 
-<p>So a big thing in Ruby is <strong>methods</strong>. Thus far, I&rsquo;ve been thinking about methods <strong>as if they were verbs in English</strong> &mdash; just like verbs describe actions, so methods let us act upon and DO things with objects.</p>
+<p>So a big thing in Ruby is <b>methods</b>. Thus far, I&rsquo;ve been thinking about methods <b>as if they were verbs in English</b> &mdash; just like verbs describe actions, so methods let us act upon and DO things with objects.</p>
 
-<p>Now, a particular type of object called <strong>Enumerables</strong> has caused me some grief this past week, as it seems you can call upon an Enumerable an infinite list of methods. What are some examples of Enumerables? Well, basically any data structure that holds data and is therefore useful in Ruby &mdash; two common ones being <strong>arrays and hashes</strong>. And thanks to David Grayson&rsquo;s Las Vegas Ruby Group presentation, <a href="https://speakerdeck.com/lvrug/rubys-enumerable-module-david-grayson">&ldquo;Ruby&rsquo;s Enumerable Module&rdquo;</a>, I now know that ranges, sets, String#chars, and String#bytes are also considered Enumerables.</p>
+<p>Now, a particular type of object called <b>Enumerables</b> has caused me some grief this past week, as it seems you can call upon an Enumerable an infinite list of methods. What are some examples of Enumerables? Well, basically any data structure that holds data and is therefore useful in Ruby &mdash; two common ones being <b>arrays and hashes</b>. And thanks to David Grayson&rsquo;s Las Vegas Ruby Group presentation, <a href="https://speakerdeck.com/lvrug/rubys-enumerable-module-david-grayson">&ldquo;Ruby&rsquo;s Enumerable Module&rdquo;</a>, I now know that ranges, sets, String#chars, and String#bytes are also considered Enumerables.</p>
 
-<p>Grayson&rsquo;s deck is pretty straightforward &mdash; no fluff, mostly examples of how an Enumerable might respond to or behave under a method. But this is great! Sometimes you get tired of consulting <a href="http://ruby-doc.org/core-2.0.0/">this</a> and it&rsquo;s nice to have found another source that really emphasizes <strong>what the &lsquo;verbs&rsquo;, i.e methods, do</strong>. Because let&rsquo;s face it. Without Enumerables and their corresponding methods, there&rsquo;s just&hellip; really not much else to do in Ruby. If you&rsquo;re not acting upon data by transforming/accessing/re-organizing/passing it around from one part of your program to another, then what are you doing? Right. And the only way you&rsquo;re going to accomplish any of the above is by taking advantage of all of Ruby&rsquo;s insane methods.</p>
+<p>Grayson&rsquo;s deck is pretty straightforward &mdash; no fluff, mostly examples of how an Enumerable might respond to or behave under a method. But this is great! Sometimes you get tired of consulting <a href="http://ruby-doc.org/core-2.0.0/">this</a> and it&rsquo;s nice to have found another source that really emphasizes <b>what the &lsquo;verbs&rsquo;, i.e methods, do</b>. Because let&rsquo;s face it. Without Enumerables and their corresponding methods, there&rsquo;s just&hellip; really not much else to do in Ruby. If you&rsquo;re not acting upon data by transforming/accessing/re-organizing/passing it around from one part of your program to another, then what are you doing? Right. And the only way you&rsquo;re going to accomplish any of the above is by taking advantage of all of Ruby&rsquo;s insane methods.</p>
 
 <p>So the most prevalent Enumerable method that I&rsquo;d encountered way early on in my Ruby journey &mdash; dare I say the most <em>commonplace</em> or <em>well-known</em> method &mdash; is:</p>
 
 <p><code>.each</code></p>
 
-<p>Up until the end of last week, I tried to solve all my iteration problems using <code>.each</code>. And while the method does encompass the very spirit of iteration (how much more literal can it get than telling your program, &ldquo;I want you to consider <strong>each</strong> thing and do what I say to it&rdquo;???), relying on it for every scenario is like having one verb in your vocabulary and running around insisting that it should convey exactly what you mean, regardless of what it is you&rsquo;re trying to say (i.e &ldquo;play!&rdquo; to play, &ldquo;play!&rdquo; to eat, &ldquo;play!&rdquo; to sleep, &ldquo;play!&rdquo; to go home, &ldquo;play!&rdquo; to go to bed &mdash; WHY WON&rsquo;T ANYONE DO WHAT I ASK?!). It&rsquo;d be ludicrous.</p>
+<p>Up until the end of last week, I tried to solve all my iteration problems using <code>.each</code>. And while the method does encompass the very spirit of iteration (how much more literal can it get than telling your program, &ldquo;I want you to consider <b>each</b> thing and do what I say to it&rdquo;???), relying on it for every scenario is like having one verb in your vocabulary and running around insisting that it should convey exactly what you mean, regardless of what it is you&rsquo;re trying to say (i.e &ldquo;play!&rdquo; to play, &ldquo;play!&rdquo; to eat, &ldquo;play!&rdquo; to sleep, &ldquo;play!&rdquo; to go home, &ldquo;play!&rdquo; to go to bed &mdash; WHY WON&rsquo;T ANYONE DO WHAT I ASK?!). It&rsquo;d be ludicrous.</p>
 
 <p>So I expanded my Ruby vocabulary the tiniest bit and discovered a few more Enumerable iterators that are SUPER useful, including:</p>
 
