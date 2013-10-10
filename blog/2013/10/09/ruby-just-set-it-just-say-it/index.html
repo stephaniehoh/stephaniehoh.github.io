@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ruby: Just Set It. Just Say It. - stephanie writes code</title>
+  <meta name="author" content="Stephanie Oh">
+
+  
+  <meta name="description" content="When we&rsquo;re fluent in a language, we take for granted everything about it that feels intuitive. Ever feel that way when asked something specific &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">stephanie writes code</a></h1>
+  
+    <h2>(For People Who Read English Good)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:stephaniehoh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby: Just Set It. Just Say It.</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-09T23:11:00-04:00" pubdate data-updated="true">Oct 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>When we&rsquo;re fluent in a language, we take for granted everything about it that feels intuitive. Ever feel that way when asked something specific about English? Say you had to conjure up some intelligent explanation for why certain verbs conjugate irregularly while others don&rsquo;t. You&rsquo;d probably say something like, &ldquo;I don&rsquo;t know! I just know that they do. I&rsquo;ve always known. If you know English, it&rsquo;s like&hellip; intuitive.&rdquo;</p>
+
+<p>You just know.</p>
+
+<p>Well, until you decide to pick up a foreign language and start the language-learning process from scratch, you have no idea now valuable and hard-earned this intuition is. To have a SENSE of how a language works, how you can play by its rules but still bend it to your will and imagination&hellip; this is what fluency feels like. And it feels awesome, because you can really express yourself.</p>
+
+<p>The alternative, of course, can feel really really frustrating &mdash; and this has been a prevalent feeling so far in my quest to learn to &lsquo;speak&rsquo; Ruby. Everything feels unnatural. I find myself writing most of my code out in the form of pseudo-code, wishfully hoping all the steps I&rsquo;ve typed out in plain English will magically transform themselves into Ruby. Come on, you mean the computer CAN&rsquo;T interpret that? WHY THE HELL NOT.</p>
+
+<p>Anyway. Rather than throw a tantrum (and believe me, sometimes nothing sounds better than a good tantrum), I suppose it&rsquo;d be more productive for me to share a few Ruby intuition-isms (?) that I&rsquo;ve finally picked up on these last few days.</p>
+
+<h3>HOW DO YOU DEAL WITH `.collect`?!</h3>
+
+
+<p>By this, I don&rsquo;t mean how do you USE <code>.collect</code>, per se. Just to be clear though, <code>.collect</code> iterates over a data-structure (array or hash) and then, based on what else you&rsquo;ve told it to do in your code block, it returns a newly-generated array of all the affected, <code>.collect</code>ed items. Cool. What used to really puzzle me, however, was how the hell you further accessed and/or passed around the fruits of this <code>.collect</code>ed array&rsquo;s labors. For example, look at this (admittedly wonky-looking) method that uses `.collect&#8217;:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ===== Apple-picker using &#39;.collect&#39; ====== #</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">apple_picker</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">fruit</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">fruit</span> <span class="k">if</span> <span class="n">fruit</span> <span class="o">==</span> <span class="s2">&quot;apple&quot;</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how I tacked on a <code>.compact</code> LITERALLY on the end of the &lsquo;end&rsquo;? I know &mdash; IT LOOKS SO WEIRD. But the real point is, it looks like it&rsquo;s over once I wrap up my &lsquo;do&rsquo; and &lsquo;end&rsquo;. Kaput. No more access to whatever that entire block of code just returned. WHAT IF I WANTED TO DO MORE? Like, how can I make the <code>.collect</code>&rsquo;s return value a THING? Oh, #NBD. Avi finally drilled home for me today this concept: thats_what_variables_are_for = &ldquo;storing and pointing to things!&rdquo; So look. If I wanted to store the fruits of <code>.collect</code>&rsquo;s labor somewhere, I literally JUST SET THE WHOLE BLOCK AS = TO A VARIABLE. Like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ===== Apple-picker using &#39;.collect&#39; ====== #</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">apple_picker</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">some_variable</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">fruit</span><span class="o">|</span>     <span class="c1"># &lt;-- LOOK! I JUST SET THE &#39;EQUAL TO&#39; BIT RIGHT HERE</span>
+</span><span class='line'>    <span class="n">fruit</span> <span class="k">if</span> <span class="n">fruit</span> <span class="o">==</span> <span class="s2">&quot;apple&quot;</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it! It&rsquo;s that easy. And now, some_variable effectively &lsquo;houses&rsquo; the result of <code>.collect</code>.</p>
+
+<p>Oh, and by the way &mdash; since <code>end.compact</code> looks silly, here the better way to write that using curly braces:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ===== Apple-picker using &#39;.collect&#39; ====== #</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">apple_picker</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span><span class="o">|</span><span class="n">fruit</span><span class="o">|</span> <span class="n">fruit</span> <span class="k">if</span> <span class="n">fruit</span> <span class="o">==</span> <span class="s2">&quot;apple&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br>
+
+
+
+
+<h3>HOW DO YOU, LIKE, CHECK IF SOMETHING ALREADY EXISTS?</h3>
+
+
+<p>This one was a huge epiphany for me. Like HUGE. Of epic proportion. Because NOT knowing this stumped me on basically every problem I had to solve that required &lsquo;leveling out&rsquo; my iteration. Look at this first attempt to organize a hash of pigeons, for example, without explicitly &lsquo;leveling out&rsquo;:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pigeon_list</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_names</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">descriptors</span><span class="p">,</span> <span class="n">details_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">pigeon_names</span> <span class="o">=</span> <span class="n">details_hash</span><span class="o">.</span><span class="n">each_value</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">name</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">flatten</span><span class="o">.</span><span class="n">uniq</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">descriptors</span><span class="p">,</span> <span class="n">details_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">details_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">qualities</span><span class="p">,</span> <span class="n">names_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">names_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">pigeon_names</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>                      <span class="c1"># &lt;-- THE ISSUE IS AROUND HERE</span>
+</span><span class='line'>        <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">descriptors</span> <span class="o">=&gt;</span> <span class="n">qualities</span><span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">pigeon_list</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above code, my iterator is ultimately only returning the last line of the block that&rsquo;s evaluated, over-writing data with each iteration &mdash; i.e, it keeps re-populating my hash with over-writes, rather than &lsquo;leveling out&rsquo; and catching all the data. The problem, I discovered, was that I NEEDED TO ACCOUNT FOR WHETHER OR NOT SOMETHING ALREADY EXISTS. And how do you do that? YOU JUST STATE IT. Here it is in action below, in the refactored solution:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pigeon_list</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">property</span><span class="p">,</span> <span class="n">property_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">property_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">values</span><span class="p">,</span> <span class="n">birds_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">birds_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span>                     <span class="c1"># &lt;-- TO CHECK IF IT EXISTS? JUST STATE IT</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span>         <span class="c1"># &lt;-- RIGHT HERE I ASK AGAIN IF SOMETHING EXISTS</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">=</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">property</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">values</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">pigeon_list</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how easy that is? Your instinct, based on English, might be to make up some random &lsquo;questions&rsquo; to ask the entity like <code>if pigeon_list[name].exists?</code> or <code>.already_exists?</code> &mdash; but THIS IS RUBY. You don&rsquo;t need to ask any questions. YOU LITERALLY JUST STATE THE ENTITY.</p>
+
+<p>So simple. But mind still blown.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Ruby is a pretty English-y language, but it&rsquo;s not ACTUALLY English (so don&rsquo;t expect such)</li>
+<li>To &lsquo;catch&rsquo; the return value(s) of a <code>.collect</code>, simply SET THE ENTIRE BLOCK AS EQUAL TO A VARIABLE (and now it lives in the variable!)</li>
+<li>To &lsquo;level&rsquo; out your iteration and avoid re-populating with over-writes, you need to check if certain entities (i.e an array) exist already&hellip; and how to check? YOU JUST STATE THE ENTITY ITSELF</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-09T23:11:00-04:00" pubdate data-updated="true">Oct 9<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/implicit-returns/'>implicit returns</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/setting-variables/'>setting variables</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/09/keeping-your-units-of-work-manageable/" title="Previous Post: Keeping Your Units of Work Manageable">&laquo; Keeping Your Units of Work Manageable</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/09/ruby-just-set-it-just-say-it/">Ruby: Just Set It. Just Say It.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/09/keeping-your-units-of-work-manageable/">Keeping Your Units of Work Manageable</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/doing-things-with-enumerables-using-verbs-dot-dot-dot-well/">Doing Things with Enumerables Using Verbs... Well, Methods</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/git-vs-github-for-dummies/">Git vs. GitHub for Dummies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/24/hello-world/">Hello World. It's Stephanie.</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'stephaniehoh',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephanie Oh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

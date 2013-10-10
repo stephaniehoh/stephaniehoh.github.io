@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | stephanie writes code]]></title>
+  <link href="http://stephaniehoh.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://stephaniehoh.github.io/"/>
+  <updated>2013-10-10T01:39:42-04:00</updated>
+  <id>http://stephaniehoh.github.io/</id>
+  <author>
+    <name><![CDATA[Stephanie Oh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby: Just Set It. Just Say It.]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it/"/>
+    <updated>2013-10-09T23:11:00-04:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it</id>
+    <content type="html"><![CDATA[<p>When we&rsquo;re fluent in a language, we take for granted everything about it that feels intuitive. Ever feel that way when asked something specific about English? Say you had to conjure up some intelligent explanation for why certain verbs conjugate irregularly while others don&rsquo;t. You&rsquo;d probably say something like, &ldquo;I don&rsquo;t know! I just know that they do. I&rsquo;ve always known. If you know English, it&rsquo;s like&hellip; intuitive.&rdquo;</p>
+
+<p>You just know.</p>
+
+<p>Well, until you decide to pick up a foreign language and start the language-learning process from scratch, you have no idea now valuable and hard-earned this intuition is. To have a SENSE of how a language works, how you can play by its rules but still bend it to your will and imagination&hellip; this is what fluency feels like. And it feels awesome, because you can really express yourself.</p>
+
+<p>The alternative, of course, can feel really really frustrating &mdash; and this has been a prevalent feeling so far in my quest to learn to &lsquo;speak&rsquo; Ruby. Everything feels unnatural. I find myself writing most of my code out in the form of pseudo-code, wishfully hoping all the steps I&rsquo;ve typed out in plain English will magically transform themselves into Ruby. Come on, you mean the computer CAN&rsquo;T interpret that? WHY THE HELL NOT.</p>
+
+<p>Anyway. Rather than throw a tantrum (and believe me, sometimes nothing sounds better than a good tantrum), I suppose it&rsquo;d be more productive for me to share a few Ruby intuition-isms (?) that I&rsquo;ve finally picked up on these last few days.</p>
+
+<h3>HOW DO YOU DEAL WITH `.collect`?!</h3>
+
+
+<p>By this, I don&rsquo;t mean how do you USE <code>.collect</code>, per se. Just to be clear though, <code>.collect</code> iterates over a data-structure (array or hash) and then, based on what else you&rsquo;ve told it to do in your code block, it returns a newly-generated array of all the affected, <code>.collect</code>ed items. Cool. What used to really puzzle me, however, was how the hell you further accessed and/or passed around the fruits of this <code>.collect</code>ed array&rsquo;s labors. For example, look at this (admittedly wonky-looking) method that uses `.collect':</p>
+
+<p>``` ruby</p>
+
+<h1>===== Apple-picker using &lsquo;.collect&rsquo; ======</h1>
+
+<p>def apple_picker(array)
+  array.collect do |fruit|</p>
+
+<pre><code>fruit if fruit == "apple"
+</code></pre>
+
+<p>  end.compact
+end</p>
+
+<p>```</p>
+
+<p>See how I tacked on a <code>.compact</code> LITERALLY on the end of the &lsquo;end&rsquo;? I know &mdash; IT LOOKS SO WEIRD. But the real point is, it looks like it&rsquo;s over once I wrap up my &lsquo;do&rsquo; and &lsquo;end&rsquo;. Kaput. No more access to whatever that entire block of code just returned. WHAT IF I WANTED TO DO MORE? Like, how can I make the <code>.collect</code>&rsquo;s return value a THING? Oh, #NBD. Avi finally drilled home for me today this concept: thats_what_variables_are_for = &ldquo;storing and pointing to things!&rdquo; So look. If I wanted to store the fruits of <code>.collect</code>&rsquo;s labor somewhere, I literally JUST SET THE WHOLE BLOCK AS = TO A VARIABLE. Like so:</p>
+
+<p>``` ruby</p>
+
+<h1>===== Apple-picker using &lsquo;.collect&rsquo; ======</h1>
+
+<p>def apple_picker(array)
+  some_variable = array.collect do |fruit|     # &lt;&mdash; LOOK! I JUST SET THE &lsquo;EQUAL TO&rsquo; BIT RIGHT HERE</p>
+
+<pre><code>fruit if fruit == "apple"
+</code></pre>
+
+<p>  end.compact
+end</p>
+
+<p>```</p>
+
+<p>That&rsquo;s it! It&rsquo;s that easy. And now, some_variable effectively &lsquo;houses&rsquo; the result of <code>.collect</code>.</p>
+
+<p>Oh, and by the way &mdash; since <code>end.compact</code> looks silly, here the better way to write that using curly braces:</p>
+
+<p>``` ruby</p>
+
+<h1>===== Apple-picker using &lsquo;.collect&rsquo; ======</h1>
+
+<p>def apple_picker(array)
+  array.collect {|fruit| fruit if fruit == &ldquo;apple&rdquo;}.compact
+end</p>
+
+<p>```</p>
+
+<br>
+
+
+
+
+<h3>HOW DO YOU, LIKE, CHECK IF SOMETHING ALREADY EXISTS?</h3>
+
+
+<p>This one was a huge epiphany for me. Like HUGE. Of epic proportion. Because NOT knowing this stumped me on basically every problem I had to solve that required &lsquo;leveling out&rsquo; my iteration. Look at this first attempt to organize a hash of pigeons, for example, without explicitly &lsquo;leveling out&rsquo;:</p>
+
+<p>``` ruby</p>
+
+<p>pigeon_list = {}</p>
+
+<p>pigeon_names = []
+pigeon_data.each do |descriptors, details_hash|
+  pigeon_names = details_hash.each_value.collect do |name|</p>
+
+<pre><code>name
+</code></pre>
+
+<p>  end.flatten.uniq
+end</p>
+
+<p>pigeon_data.each do |descriptors, details_hash|
+  details_hash.each do |qualities, names_array|</p>
+
+<pre><code>names_array.each do |name|
+  if pigeon_names.include?(name)                      # &lt;-- THE ISSUE IS AROUND HERE
+    pigeon_list[name] = {descriptors =&gt; qualities}
+  end
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>puts pigeon_list</p>
+
+<p>```</p>
+
+<p>In the above code, my iterator is ultimately only returning the last line of the block that&rsquo;s evaluated, over-writing data with each iteration &mdash; i.e, it keeps re-populating my hash with over-writes, rather than &lsquo;leveling out&rsquo; and catching all the data. The problem, I discovered, was that I NEEDED TO ACCOUNT FOR WHETHER OR NOT SOMETHING ALREADY EXISTS. And how do you do that? YOU JUST STATE IT. Here it is in action below, in the refactored solution:</p>
+
+<p>``` ruby</p>
+
+<p>pigeon_list = {}</p>
+
+<p>pigeon_data.each do |property, property_hash|
+  property_hash.each do |values, birds_array|</p>
+
+<pre><code>birds_array.each do |name|
+  if pigeon_list[name]                     # &lt;-- TO CHECK IF IT EXISTS? JUST STATE IT
+    if pigeon_list[name][property]         # &lt;-- RIGHT HERE I ASK AGAIN IF SOMETHING EXISTS
+      pigeon_list[name][property] &lt;&lt; values    
+    else
+      pigeon_list[name][property] = values     
+    end
+  else                                         
+    pigeon_list[name] = {property =&gt; [values]} 
+  end
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>p pigeon_list</p>
+
+<p>```</p>
+
+<p>See how easy that is? Your instinct, based on English, might be to make up some random &lsquo;questions&rsquo; to ask the entity like <code>if pigeon_list[name].exists?</code> or <code>.already_exists?</code> &mdash; but THIS IS RUBY. You don&rsquo;t need to ask any questions. YOU LITERALLY JUST STATE THE ENTITY.</p>
+
+<p>So simple. But mind still blown.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Ruby is a pretty English-y language, but it&rsquo;s not ACTUALLY English (so don&rsquo;t expect such)</li>
+<li>To &lsquo;catch&rsquo; the return value(s) of a <code>.collect</code>, simply SET THE ENTIRE BLOCK AS EQUAL TO A VARIABLE (and now it lives in the variable!)</li>
+<li>To &lsquo;level&rsquo; out your iteration and avoid re-populating with over-writes, you need to check if certain entities (i.e an array) exist already&hellip; and how to check? YOU JUST STATE THE ENTITY ITSELF</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

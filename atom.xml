@@ -4,7 +4,7 @@
   <title><![CDATA[stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-09T23:05:32-04:00</updated>
+  <updated>2013-10-10T01:39:42-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -12,6 +12,191 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby: Just Set It. Just Say It.]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it/"/>
+    <updated>2013-10-09T23:11:00-04:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/10/09/ruby-just-set-it-just-say-it</id>
+    <content type="html"><![CDATA[<p>When we&rsquo;re fluent in a language, we take for granted everything about it that feels intuitive. Ever feel that way when asked something specific about English? Say you had to conjure up some intelligent explanation for why certain verbs conjugate irregularly while others don&rsquo;t. You&rsquo;d probably say something like, &ldquo;I don&rsquo;t know! I just know that they do. I&rsquo;ve always known. If you know English, it&rsquo;s like&hellip; intuitive.&rdquo;</p>
+
+<p>You just know.</p>
+
+<p>Well, until you decide to pick up a foreign language and start the language-learning process from scratch, you have no idea now valuable and hard-earned this intuition is. To have a SENSE of how a language works, how you can play by its rules but still bend it to your will and imagination&hellip; this is what fluency feels like. And it feels awesome, because you can really express yourself.</p>
+
+<p>The alternative, of course, can feel really really frustrating &mdash; and this has been a prevalent feeling so far in my quest to learn to &lsquo;speak&rsquo; Ruby. Everything feels unnatural. I find myself writing most of my code out in the form of pseudo-code, wishfully hoping all the steps I&rsquo;ve typed out in plain English will magically transform themselves into Ruby. Come on, you mean the computer CAN&rsquo;T interpret that? WHY THE HELL NOT.</p>
+
+<p>Anyway. Rather than throw a tantrum (and believe me, sometimes nothing sounds better than a good tantrum), I suppose it&rsquo;d be more productive for me to share a few Ruby intuition-isms (?) that I&rsquo;ve finally picked up on these last few days.</p>
+
+<h3>HOW DO YOU DEAL WITH `.collect`?!</h3>
+
+
+<p>By this, I don&rsquo;t mean how do you USE <code>.collect</code>, per se. Just to be clear though, <code>.collect</code> iterates over a data-structure (array or hash) and then, based on what else you&rsquo;ve told it to do in your code block, it returns a newly-generated array of all the affected, <code>.collect</code>ed items. Cool. What used to really puzzle me, however, was how the hell you further accessed and/or passed around the fruits of this <code>.collect</code>ed array&rsquo;s labors. For example, look at this (admittedly wonky-looking) method that uses `.collect&#8217;:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ===== Apple-picker using &#39;.collect&#39; ====== #</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">apple_picker</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">fruit</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">fruit</span> <span class="k">if</span> <span class="n">fruit</span> <span class="o">==</span> <span class="s2">&quot;apple&quot;</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how I tacked on a <code>.compact</code> LITERALLY on the end of the &lsquo;end&rsquo;? I know &mdash; IT LOOKS SO WEIRD. But the real point is, it looks like it&rsquo;s over once I wrap up my &lsquo;do&rsquo; and &lsquo;end&rsquo;. Kaput. No more access to whatever that entire block of code just returned. WHAT IF I WANTED TO DO MORE? Like, how can I make the <code>.collect</code>&rsquo;s return value a THING? Oh, #NBD. Avi finally drilled home for me today this concept: thats_what_variables_are_for = &ldquo;storing and pointing to things!&rdquo; So look. If I wanted to store the fruits of <code>.collect</code>&rsquo;s labor somewhere, I literally JUST SET THE WHOLE BLOCK AS = TO A VARIABLE. Like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ===== Apple-picker using &#39;.collect&#39; ====== #</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">apple_picker</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">some_variable</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">fruit</span><span class="o">|</span>     <span class="c1"># &lt;-- LOOK! I JUST SET THE &#39;EQUAL TO&#39; BIT RIGHT HERE</span>
+</span><span class='line'>    <span class="n">fruit</span> <span class="k">if</span> <span class="n">fruit</span> <span class="o">==</span> <span class="s2">&quot;apple&quot;</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it! It&rsquo;s that easy. And now, some_variable effectively &lsquo;houses&rsquo; the result of <code>.collect</code>.</p>
+
+<p>Oh, and by the way &mdash; since <code>end.compact</code> looks silly, here the better way to write that using curly braces:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ===== Apple-picker using &#39;.collect&#39; ====== #</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">apple_picker</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span><span class="o">|</span><span class="n">fruit</span><span class="o">|</span> <span class="n">fruit</span> <span class="k">if</span> <span class="n">fruit</span> <span class="o">==</span> <span class="s2">&quot;apple&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br>
+
+
+
+
+<h3>HOW DO YOU, LIKE, CHECK IF SOMETHING ALREADY EXISTS?</h3>
+
+
+<p>This one was a huge epiphany for me. Like HUGE. Of epic proportion. Because NOT knowing this stumped me on basically every problem I had to solve that required &lsquo;leveling out&rsquo; my iteration. Look at this first attempt to organize a hash of pigeons, for example, without explicitly &lsquo;leveling out&rsquo;:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pigeon_list</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_names</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">descriptors</span><span class="p">,</span> <span class="n">details_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">pigeon_names</span> <span class="o">=</span> <span class="n">details_hash</span><span class="o">.</span><span class="n">each_value</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">name</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">flatten</span><span class="o">.</span><span class="n">uniq</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">descriptors</span><span class="p">,</span> <span class="n">details_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">details_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">qualities</span><span class="p">,</span> <span class="n">names_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">names_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">pigeon_names</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>                      <span class="c1"># &lt;-- THE ISSUE IS AROUND HERE</span>
+</span><span class='line'>        <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">descriptors</span> <span class="o">=&gt;</span> <span class="n">qualities</span><span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">pigeon_list</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above code, my iterator is ultimately only returning the last line of the block that&rsquo;s evaluated, over-writing data with each iteration &mdash; i.e, it keeps re-populating my hash with over-writes, rather than &lsquo;leveling out&rsquo; and catching all the data. The problem, I discovered, was that I NEEDED TO ACCOUNT FOR WHETHER OR NOT SOMETHING ALREADY EXISTS. And how do you do that? YOU JUST STATE IT. Here it is in action below, in the refactored solution:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pigeon_list</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">property</span><span class="p">,</span> <span class="n">property_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">property_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">values</span><span class="p">,</span> <span class="n">birds_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">birds_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span>                     <span class="c1"># &lt;-- TO CHECK IF IT EXISTS? JUST STATE IT</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span>         <span class="c1"># &lt;-- RIGHT HERE I ASK AGAIN IF SOMETHING EXISTS</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">=</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">property</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">values</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">pigeon_list</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how easy that is? Your instinct, based on English, might be to make up some random &lsquo;questions&rsquo; to ask the entity like <code>if pigeon_list[name].exists?</code> or <code>.already_exists?</code> &mdash; but THIS IS RUBY. You don&rsquo;t need to ask any questions. YOU LITERALLY JUST STATE THE ENTITY.</p>
+
+<p>So simple. But mind still blown.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Ruby is a pretty English-y language, but it&rsquo;s not ACTUALLY English (so don&rsquo;t expect such)</li>
+<li>To &lsquo;catch&rsquo; the return value(s) of a <code>.collect</code>, simply SET THE ENTIRE BLOCK AS EQUAL TO A VARIABLE (and now it lives in the variable!)</li>
+<li>To &lsquo;level&rsquo; out your iteration and avoid re-populating with over-writes, you need to check if certain entities (i.e an array) exist already&hellip; and how to check? YOU JUST STATE THE ENTITY ITSELF</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keeping Your Units of Work Manageable]]></title>
