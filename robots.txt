@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://stephaniehoh.github.io/sitemap.xml 
