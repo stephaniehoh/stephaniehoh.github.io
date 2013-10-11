@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Refactoring Using ||= - stephanie writes code</title>
+  <meta name="author" content="Stephanie Oh">
+
+  
+  <meta name="description" content="I wanted to write up a short addendum to my previous post, &ldquo;Ruby: Just Set It. Just Say It&rdquo; and show you a simple example of refactoring &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/10/11/refactoring-using-%7C%7C-equals">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">stephanie writes code</a></h1>
+  
+    <h2>(For People Who Read English Good)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:stephaniehoh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Refactoring Using ||=</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T10:14:00-04:00" pubdate data-updated="true">Oct 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I wanted to write up a short addendum to my previous post, &ldquo;Ruby: Just Set It. Just Say It&rdquo; and show you a simple example of refactoring.</p>
+
+<p>What is refactoring, you ask?</p>
+
+<p>In my mind, it&rsquo;s a little like editing your writing. Your first draft might be an incoherent mess, but at least you got your thoughts out. From there, it&rsquo;s your responsibility as a writer to clean up your work so that it best conveys what you mean to say FROM YOUR READERS&#8217; PERSPECTIVE. Likewise, refactoring your code is a kind of clean-up process. It shouldn&rsquo;t change your program&rsquo;s external behavior, i.e the final output shouldn&rsquo;t be changing, but HOW your program gets there should have effectively changed.</p>
+
+<p>I guess this is a little different than editing your writing, in that the former is to better serve the consumer &mdash; the reader; refactoring code, on the other had, doesn&rsquo;t yield any new outcome to the consumer &mdash; the user. However, refactoring does make your code more readable to OTHER CODERS. Which can ultimately mean that future de-bugging efforts will be less painful. That, and you should take pride in your code! Make it as readable, logical, and elegant as possible &mdash; you wouldn&rsquo;t do any differently in your writing, would you??</p>
+
+<p>With that said, here&rsquo;s a side-by-side comparison of my code for the pigeon organizer exercise, pre and post refactoring:</p>
+
+<h4>PRE-REFACTORING, USING &#8216;IF ELSE&#8217; LOGIC</h4>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pigeon_list</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">property</span><span class="p">,</span> <span class="n">property_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">property_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">values</span><span class="p">,</span> <span class="n">birds_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">birds_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">=</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">property</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">values</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h4>POST-REFACTORING, USING THE ||= OPERATOR</h4>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">arranged_pigeon_hash</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="n">value_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">value_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">traits</span><span class="p">,</span> <span class="n">names_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">names_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">arranged_pigeon_hash</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">||=</span> <span class="p">{</span> <span class="n">attribute</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">traits</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">arranged_pigeon_hash</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">attribute</span><span class="o">]</span> <span class="o">||=</span> <span class="n">traits</span>
+</span><span class='line'>          <span class="n">arranged_pigeon_hash</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">attribute</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">traits</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The outcome is the same either way, but the refactored version saves me a few lines of code and ultimately captures the logic behind the solution better.</p>
+
+<p>What the ||= operator does, in a nutshell, is evaluates whatever&rsquo;s on the LEFT side of the operator first. If that condition returns &lsquo;true&rsquo;, then the program proceeds to the next line of code, and so on. If the condition is &lsquo;false&rsquo;, then whatever&rsquo;s on the RIGHT side of the operator is assigned as the value of the left side.</p>
+
+<p>Cool, right?!</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Write code that works first. Then refactor it.</li>
+<li>Refactoring should&rsquo;t change the final outcome of your program; it should just help your program get there more efficiently, and make your code more readable to OTHER CODERS</li>
+<li>The ||= (&ldquo;or or equals&rdquo;) operator is a cool alternative to using &lsquo;if else&rsquo; logic, if you intend for some part of your program to handle new assignment (i.e values to keys, etc.)</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T10:14:00-04:00" pubdate data-updated="true">Oct 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/or-or-equals/'>or-or-equals</a>, <a class='category' href='/blog/categories/refactoring/'>refactoring</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/10/11/refactoring-using-%7C%7C-equals/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/10/11/refactoring-using-%7C%7C-equals/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/10/ruby-just-set-it-just-say-it/" title="Previous Post: Ruby: Just Set It. Just Say It.">&laquo; Ruby: Just Set It. Just Say It.</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/11/refactoring-using-%7C%7C-equals/">Refactoring Using ||=</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/10/ruby-just-set-it-just-say-it/">Ruby: Just Set It. Just Say It.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/09/keeping-your-units-of-work-manageable/">Keeping Your Units of Work Manageable</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/08/doing-things-with-enumerables-using-verbs-dot-dot-dot-well/">Doing Things with Enumerables Using Verbs... Well, Methods</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/07/git-vs-github-for-dummies/">Git vs. GitHub for Dummies</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'stephaniehoh',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephanie Oh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
