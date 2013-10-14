@@ -4,7 +4,7 @@
   <title><![CDATA[stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-11T11:02:38-04:00</updated>
+  <updated>2013-10-14T00:45:31-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lost in Translation - 'Till You Normalize]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/10/12/lost-in-translation-till-you-normalize/"/>
+    <updated>2013-10-12T23:33:00-04:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/10/12/lost-in-translation-till-you-normalize</id>
+    <content type="html"><![CDATA[<p>This is something you&rsquo;re going to hear a lot over the course of your Ruby journey: &ldquo;NORMALIZE YOUR DATA&rdquo;. But what does this mean?</p>
+
+<p>Between humans, the concept of &ldquo;normal&rdquo; is typically (and overly-simplistically) understood to connote, &ldquo;not weird&rdquo;. As in, if you&rsquo;re normal, then by default you are not a total weirdo (/ˈwi(ə)rdō/ 1. A person regarded as being very strange or eccentric 2. A deranged, potentially dangerous person. I suppose, however, that derangement and danger are not limited to just people).</p>
+
+<p>In Ruby, on the other hand, &ldquo;normal&rdquo; &mdash; or rather, &ldquo;normalized&rdquo; &mdash; carries a very different meaning. The latter is mostly used to describe data (i.e strings, numbers, etc.) that has been transformed and accounted for in such a way that it is now easier to compare it against other data. It&rsquo;s kind of like assuring that nothing will be &ldquo;lost in translation&rdquo;. In fact, it&rsquo;d be a little like having a handy translator on hand (ha! no pun inten&hellip;) that can translate &mdash; in real time &mdash; whatever you&rsquo;re saying out loud in English to another language. And this might save your @$$ when you&rsquo;re trying to communicate to a room full of non-English speakers. IN FACT, when we humans translate stuff, we are, essentially, NORMALIZING it!</p>
+
+<p>Actually, I just thought of the best analogy of all: <u>it&rsquo;s making things &ldquo;apples to apples&rdquo;</u>. We couldn&rsquo;t run around comparing apples to oranges now, could we?!</p>
+
+<p><img src="http://www.foodrenegade.com/wp-content/uploads/2013/04/apples-a-year-old.jpg"></p>
+
+<h4>SOME COMMON METHODS USED TO &#8216;NORMALIZE&#8217; DATA:</h4>
+
+
+<p><code>.upcase</code> (capitalizes a string)<br>
+<code>.downcase</code> (lower-cases a string)<br>
+<code>.reverse</code> (reverses a string)<br>
+<code>.sort</code> (sorts an array in ascending order, by default)<br>
+<code>.split()</code> (splits a string per whatever you specify as an argument)<br>
+<code>.gsub()</code> (substitutes all instances of one thing to another)<br></p>
+
+<h4>SOME COMMON RUBY PROBLEMS THAT REQUIRE &#8216;NORMALIZATION&#8217;:</h4>
+
+
+<p>&ldquo;Does Some_Array Contain an Anagram of a Given Word?&rdquo; (can be nicely solved using <code>.sort</code>)<br>
+&ldquo;Is This_Sentence a Palindrome?&rdquo; (might need a little<code>.downcase</code>, <code>.gsub</code> and <code>.reverse</code> action)<br>
+&ldquo;Deaf Grandma!&rdquo; (a rare one that calls upon <code>.upcase</code>!)<br>
+Dealing with user input in general via &lsquo;gets.chomp&rsquo; or &lsquo;gets.strip&rsquo; (always add a <code>.downcase</code> for good measure!)</p>
+
+<p>Why that last piece of advice? Because every user on the planet can&rsquo;t be trusted to input his or her data accurately, every time. So &lsquo;normalizing&rsquo; this input by calling <code>.downcase</code> on it ensures that you&rsquo;ve accounted for any capitalization inconsistencies. You can now better compare apples to apples.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>&lsquo;Normalizing&rsquo; your data means transforming its appearance slightly so that your program knows it&rsquo;s comparing apples to apples</li>
+<li>Some common methods you can use to normalize data include:<br>
+<code>.upcase</code><br>
+<code>.downcase</code><br>
+<code>.reverse</code><br>
+<code>.sort</code><br>
+<code>.split</code><br>
+<code>.gsub</code><br></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Refactoring Using ||=]]></title>
