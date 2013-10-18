@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Git vs. GitHub for Dummies - stephanie writes code</title>
+  <title>stephanie writes code</title>
   <meta name="author" content="Stephanie Oh">
 
   
-  <meta name="description" content="I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post &mdash; after Day 2 at Flatiron &mdash; I &hellip;">
+  <meta name="description" content="A big thing for me as I make the transition away from my former life as an English and writing instructor is to make sense of coding by relating it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/10/07/git-vs-github-for-dummies">
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/page/2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
@@ -63,12 +63,100 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Git vs. GitHub for Dummies</h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/08/doing-things-with-enumerables-using-verbs-dot-dot-dot-well/">Doing Things With Enumerables Using Verbs&#8230; Well, Methods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T03:28:00-04:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A big thing for me as I make the transition away from my former life as an English and writing instructor is to make sense of coding by relating it to familiar concepts by means of analogy.</p>
+
+<p>So a big thing in Ruby is <b>methods</b>. Thus far, I&rsquo;ve been thinking about methods <b>as if they were verbs in English</b> &mdash; just like verbs describe actions, so methods let us act upon and DO things with objects.</p>
+
+<p>Now, a particular type of object called <b>Enumerables</b> has caused me some grief this past week, as it seems you can call upon an Enumerable an infinite list of methods. What are some examples of Enumerables? Well, basically any data structure that holds data and is therefore useful in Ruby &mdash; two common ones being <b>arrays and hashes</b>. And thanks to David Grayson&rsquo;s Las Vegas Ruby Group presentation, <a href="https://speakerdeck.com/lvrug/rubys-enumerable-module-david-grayson">&ldquo;Ruby&rsquo;s Enumerable Module&rdquo;</a>, I now know that ranges, sets, String#chars, and String#bytes are also considered Enumerables.</p>
+
+<p>Grayson&rsquo;s deck is pretty straightforward &mdash; no fluff, mostly examples of how an Enumerable might respond to or behave under a method. But this is great! Sometimes you get tired of consulting <a href="http://ruby-doc.org/core-2.0.0/">this</a> and it&rsquo;s nice to have found another source that really emphasizes <b>what the &lsquo;verbs&rsquo;, i.e methods, do</b>. Because let&rsquo;s face it. Without Enumerables and their corresponding methods, there&rsquo;s just&hellip; really not much else to do in Ruby. If you&rsquo;re not acting upon data by transforming/accessing/re-organizing/passing it around from one part of your program to another, then what are you doing? Right. And the only way you&rsquo;re going to accomplish any of the above is by taking advantage of all of Ruby&rsquo;s insane methods.</p>
+
+<p>So the most prevalent Enumerable method that I&rsquo;d encountered way early on in my Ruby journey &mdash; dare I say the most <em>commonplace</em> or <em>well-known</em> method &mdash; is:</p>
+
+<p><code>.each</code></p>
+
+<p>Up until the end of last week, I tried to solve all my iteration problems using <code>.each</code>. And while the method does encompass the very spirit of iteration (how much more literal can it get than telling your program, &ldquo;I want you to consider <b>each</b> thing and do what I say to it&rdquo;???), relying on it for every scenario is like having one verb in your vocabulary and running around insisting that it should convey exactly what you mean, regardless of what it is you&rsquo;re trying to say (i.e &ldquo;play!&rdquo; to play, &ldquo;play!&rdquo; to eat, &ldquo;play!&rdquo; to sleep, &ldquo;play!&rdquo; to go home, &ldquo;play!&rdquo; to go to bed &mdash; WHY WON&rsquo;T ANYONE DO WHAT I ASK?!). It&rsquo;d be ludicrous.</p>
+
+<p>So I expanded my Ruby vocabulary the tiniest bit and discovered a few more Enumerable iterators that are SUPER useful, including:</p>
+
+<p><code>.collect</code> or <code>.map</code> (they do the same thing)<br>
+and<br>
+<code>.select</code></p>
+
+<p>(to grasp how useful <code>.select</code> is, just take a look at <a href="https://gist.github.com/stephaniehoh/6871313">this Anagram exercise</a> I solved in class yesterday)</p>
+
+<p>Finally, in the wee hours of this morning/night, Grayson has introduced me to a few more iterators and methods that seem potentially very useful (and I can&rsquo;t wait to try them out tomorrow):</p>
+
+<p><code>.collect_concat</code><br>
+<code>.cycle</code><br>
+and<br>
+<code>.group_by</code></p>
+
+<p>The last one, <code>.group_by</code>, I&rsquo;m sure I&rsquo;ve come across before but probably forgot existed. Just being honest.</p>
+
+<br>
+
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Methods are like verbs&hellip; you need to have a decent vocabulary of them, or else you&rsquo;ll be limited in how you can express yourself</li>
+<li>Enumerables are pretty important in Ruby; they store data</li>
+<li>Methods are also pretty important in Ruby; they let you access and manipulate the data stored in the Enumerables</li>
+<li>Some cool iterators and methods you can call on Enumerables include:<br>
+<code>.each</code><br>
+<code>.collect</code> or <code>.map</code> (they do the same thing)<br>
+<code>.select</code><br>
+<code>.collect_concat</code><br>
+<code>.cycle</code><br>
+<code>.group_by</code></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/07/git-vs-github-for-dummies/">Git vs. GitHub for Dummies</a></h1>
     
     
       <p class="meta">
@@ -91,7 +179,7 @@
   </header>
 
 
-<div class="entry-content"><p>I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post &mdash; after Day 2 at Flatiron &mdash; I bemoaned the fact that everything I&rsquo;d attempted to absorb about Git and Github had, by the end of the day, turned into unpalatable git soup. A week later, after enough exposure and repetition (and causing one too many merge conflicts), I was able to strain some method out of the git soup-madness.</p>
+  <div class="entry-content"><p>I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post &mdash; after Day 2 at Flatiron &mdash; I bemoaned the fact that everything I&rsquo;d attempted to absorb about Git and Github had, by the end of the day, turned into unpalatable git soup. A week later, after enough exposure and repetition (and causing one too many merge conflicts), I was able to strain some method out of the git soup-madness.</p>
 
 <p>Luckily, the epiphany still seems to have stuck with me (note: I say &lsquo;luckily&rsquo;, because I&rsquo;ve been learning new things at such a breakneck pace these last two weeks that for every 5 things I learn, 4 of them are overwritten by yet MORE new things and I&rsquo;m left with just one new pearl of wisdom) &mdash; so I&rsquo;d like to share some of that epiphany with all you wonderful people.</p>
 
@@ -142,64 +230,62 @@
 </ol>
 
 </div>
+  
+  
 
 
-  <footer>
-    <p class="meta">
+    </article>
+  
+  
+    <article>
       
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-07T15:46:00-04:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/github/'>github</a>
-  
-</span>
-
-
-    </p>
+  <header>
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/10/07/git-vs-github-for-dummies/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/10/07/git-vs-github-for-dummies/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+      <h1 class="entry-title"><a href="/blog/2013/09/24/hello-world/">Hello World. It&#8217;s Stephanie.</a></h1>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/09/24/hello-world/" title="Previous Post: Hello World. It's Stephanie.">&laquo; Hello World. It's Stephanie.</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/10/08/doing-things-with-enumerables-using-verbs-dot-dot-dot-well/" title="Next Post: Doing Things with Enumerables Using Verbs... Well, Methods">Doing Things with Enumerables Using Verbs... Well, Methods &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
+    
+      <p class="meta">
+        
 
 
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-24T22:27:00-04:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I completed day two at the Flatiron School today. My head is spinning with all the new concepts and terminology I&rsquo;ve been trying to absorb from the last 48 hours &mdash; deploying, raking, branching, rebasing, adding, committing, and merging. Everything is sort of merging into git-soup, at the moment.</p>
+
+<p>But I learned some handy keyboard shortcuts that I can wrap my head&hellip; err, fingers around. Like command + tab to navigate around my open applications. And command + space to summon Spotlight. It sounds silly, but I didn&rsquo;t used to know these things. I&rsquo;ve learned more about my computer in the last two days than I ever have.</p>
+
+<p>Goodbye, track pad?</p>
+
+<p>Hello world.</p>
 </div>
+  
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
 <aside class="sidebar">
   
     <section>
@@ -211,7 +297,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2013/10/12/lost-in-translation-till-you-normalize/">Lost in Translation - 'Till You Normalize</a>
+        <a href="/blog/2013/10/12/lost-in-translation-till-you-normalize/">Lost in Translation - &#8216;Till You Normalize</a>
       </li>
     
       <li class="post">
@@ -232,7 +318,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
@@ -264,7 +350,6 @@
 
   
 </aside>
-
 
     </div>
   </div>

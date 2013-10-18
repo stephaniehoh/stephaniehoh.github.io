@@ -4,7 +4,7 @@
   <title><![CDATA[stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-14T00:45:31-04:00</updated>
+  <updated>2013-10-18T02:10:31-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[.zip and Hash[] are Really Handy]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/10/18/dot-zip-and-hash-are-really-handy/"/>
+    <updated>2013-10-18T01:07:00-04:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/10/18/dot-zip-and-hash-are-really-handy</id>
+    <content type="html"><![CDATA[<p>We&rsquo;re wrapping up week 4 at the Flatiron School and&hellip; I&rsquo;m starting to work on a fun gem idea! Yes, I&rsquo;ve been inspired by my classmates to take the plunge and build my own Ruby gem.</p>
+
+<p>But first things first. I need data in order for my gem to be useful. So earlier today (well, yesterday, at this point) &mdash; I proceeded to scrape some data. And in the process, I discovered a neat pair of methods that work very nicely together: .zip and Hash[].</p>
+
+<h4>WHAT DOES .ZIP DO?</h4>
+
+
+<p>The .zip method basically joins two arrays together, pairing elements from each that have matching indexes and returning the whole thing as a big array that contains mini-arrays populated with the newly paired elements. You set one of the arrays as the receiver of the method, which then takes the second array as an argument. It looks something like this:</p>
+
+<p><code>array1.zip(array2)</code></p>
+
+<p>Not too complicated, right?</p>
+
+<p>Here it is in action:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array1</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array1</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br>
+
+
+
+
+<h4>WHAT DOES HASH[] DO?</h4>
+
+
+<p>The Hash[] class method is SO cool. You can basically dump the whole <code>array1.zip(array2)</code> sequence inside of the [brackets], like so:</p>
+
+<p><code>Hash[array1.zip(array2)]</code></p>
+
+<p>What do you think this will result in?</p>
+
+<p>Only one way to find out!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array1</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Hash</span><span class="o">[</span><span class="n">array1</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;3=&gt;banana&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br>
+
+
+<p>How crazy awesome is that?! It returned a hash and populated it with key-value pairs made out of the elements from each array that have matching index numbers.</p>
+
+<p>So the .zip and Hash[] methods, together, proved very useful indeed as I scraped data from Billboard.com and was able to get <code>artists</code> and <code>songs</code>, separately, to look like a numbered list of the pair, <code>artist - song</code>. And that&rsquo;s all I&rsquo;m saying about my gem-in-progress, for now!</p>
+
+<p>I &lt;3 Ruby.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>You can join two arrays together and return matching-index pairs using <code>array1.zip(array2)</code></li>
+<li>You can create a hash populated with key-value pairs made out of two arrays using <code>Hash[array1.zip(array2)]</code></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lost in Translation - 'Till You Normalize]]></title>

@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>.zip and Hash[] are Really Handy - stephanie writes code</title>
+  <meta name="author" content="Stephanie Oh">
+
+  
+  <meta name="description" content="We&rsquo;re wrapping up week 4 at the Flatiron School and&hellip; I&rsquo;m starting to work on a fun gem idea! Yes, I&rsquo;ve been inspired by my &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/10/18/dot-zip-and-hash-are-really-handy">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">stephanie writes code</a></h1>
+  
+    <h2>(For People Who Read English Good)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:stephaniehoh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">.zip and Hash[] Are Really Handy</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-18T01:07:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>We&rsquo;re wrapping up week 4 at the Flatiron School and&hellip; I&rsquo;m starting to work on a fun gem idea! Yes, I&rsquo;ve been inspired by my classmates to take the plunge and build my own Ruby gem.</p>
+
+<p>But first things first. I need data in order for my gem to be useful. So earlier today (well, yesterday, at this point) &mdash; I proceeded to scrape some data. And in the process, I discovered a neat pair of methods that work very nicely together: .zip and Hash[].</p>
+
+<h4>WHAT DOES .ZIP DO?</h4>
+
+
+<p>The .zip method basically joins two arrays together, pairing elements from each that have matching indexes and returning the whole thing as a big array that contains mini-arrays populated with the newly paired elements. You set one of the arrays as the receiver of the method, which then takes the second array as an argument. It looks something like this:</p>
+
+<p><code>array1.zip(array2)</code></p>
+
+<p>Not too complicated, right?</p>
+
+<p>Here it is in action:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array1</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array1</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br>
+
+
+
+
+<h4>WHAT DOES HASH[] DO?</h4>
+
+
+<p>The Hash[] class method is SO cool. You can basically dump the whole <code>array1.zip(array2)</code> sequence inside of the [brackets], like so:</p>
+
+<p><code>Hash[array1.zip(array2)]</code></p>
+
+<p>What do you think this will result in?</p>
+
+<p>Only one way to find out!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array1</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Hash</span><span class="o">[</span><span class="n">array1</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;3=&gt;banana&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<br>
+
+
+<p>How crazy awesome is that?! It returned a hash and populated it with key-value pairs made out of the elements from each array that have matching index numbers.</p>
+
+<p>So the .zip and Hash[] methods, together, proved very useful indeed as I scraped data from Billboard.com and was able to get <code>artists</code> and <code>songs</code>, separately, to look like a numbered list of the pair, <code>artist - song</code>. And that&rsquo;s all I&rsquo;m saying about my gem-in-progress, for now!</p>
+
+<p>I &lt;3 Ruby.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>You can join two arrays together and return matching-index pairs using <code>array1.zip(array2)</code></li>
+<li>You can create a hash populated with key-value pairs made out of two arrays using <code>Hash[array1.zip(array2)]</code></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-18T01:07:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dot-zip-hash-ruby-methods/'>.zip, Hash[], Ruby, methods</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/10/18/dot-zip-and-hash-are-really-handy/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/10/18/dot-zip-and-hash-are-really-handy/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/12/lost-in-translation-till-you-normalize/" title="Previous Post: Lost in Translation - 'Till You Normalize">&laquo; Lost in Translation - 'Till You Normalize</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/18/dot-zip-and-hash-are-really-handy/">.zip and Hash[] are Really Handy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/lost-in-translation-till-you-normalize/">Lost in Translation - 'Till You Normalize</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/11/refactoring-using-%7C%7C-equals/">Refactoring Using ||=</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/10/ruby-just-set-it-just-say-it/">Ruby: Just Set It. Just Say It.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/09/keeping-your-units-of-work-manageable/">Keeping Your Units of Work Manageable</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'stephaniehoh',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephanie Oh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
