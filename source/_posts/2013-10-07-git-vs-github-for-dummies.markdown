@@ -9,9 +9,6 @@ categories: [git, github]
 
 I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post -- after Day 2 at Flatiron -- I bemoaned the fact that everything I'd attempted to absorb about Git and Github had, by the end of the day, turned into unpalatable git soup. A week later, after enough exposure and repetition (and causing one too many merge conflicts), I was able to strain some method out of the git soup-madness. 
 
-Luckily, the epiphany still seems to have stuck with me (note: I say 'luckily', because I've been learning new things at such a breakneck pace these last two weeks that for every 5 things I learn, 4 of them are overwritten by yet MORE new things and I'm left with just one new pearl of wisdom) -- so I'd like to share some of that epiphany with all you wonderful people.
-
-
 Let's start by establishing a key concept: <b>Git and GitHub ARE NOT THE SAME THING</b>. 
 
 They're not??? But, like, programmers refer to them (seemingly) interchangeably! 
