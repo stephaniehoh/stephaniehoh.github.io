@@ -4,7 +4,7 @@
   <title><![CDATA[stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-18T02:10:31-04:00</updated>
+  <updated>2013-10-23T11:50:00-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -823,8 +823,6 @@ and<br>
     <updated>2013-10-07T15:46:00-04:00</updated>
     <id>http://stephaniehoh.github.io/blog/2013/10/07/git-vs-github-for-dummies</id>
     <content type="html"><![CDATA[<p>I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post &mdash; after Day 2 at Flatiron &mdash; I bemoaned the fact that everything I&rsquo;d attempted to absorb about Git and Github had, by the end of the day, turned into unpalatable git soup. A week later, after enough exposure and repetition (and causing one too many merge conflicts), I was able to strain some method out of the git soup-madness.</p>
-
-<p>Luckily, the epiphany still seems to have stuck with me (note: I say &lsquo;luckily&rsquo;, because I&rsquo;ve been learning new things at such a breakneck pace these last two weeks that for every 5 things I learn, 4 of them are overwritten by yet MORE new things and I&rsquo;m left with just one new pearl of wisdom) &mdash; so I&rsquo;d like to share some of that epiphany with all you wonderful people.</p>
 
 <p>Let&rsquo;s start by establishing a key concept: <b>Git and GitHub ARE NOT THE SAME THING</b>.</p>
 
