@@ -4,7 +4,7 @@
   <title><![CDATA[stephanie writes code]]></title>
   <link href="http://stephaniehoh.github.io/atom.xml" rel="self"/>
   <link href="http://stephaniehoh.github.io/"/>
-  <updated>2013-10-23T11:53:17-04:00</updated>
+  <updated>2013-10-31T11:01:02-04:00</updated>
   <id>http://stephaniehoh.github.io/</id>
   <author>
     <name><![CDATA[Stephanie Oh]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Easy Analogies to Demistify Web Application Jargon]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/10/31/easy-analogies-to-demistify-web-app-jargon/"/>
+    <updated>2013-10-31T01:12:00-04:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/10/31/easy-analogies-to-demistify-web-app-jargon</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m starting to think that colorful metaphors and super literal blog post titles pair best together.</p>
+
+<p>With that said (disclaimer: I&rsquo;m feeling a little dotty on this foggy Halloween day), here are some &lsquo;colorful&rsquo; metaphors and analogies to help lift the proverbial fog from some web-application jargon&hellip;</p>
+
+<br>
+
+
+
+
+<h3>1. ERB (Embedded Ruby)</h3>
+
+
+<p>ERB is little more than HTML with superpowers. You know it&rsquo;s ERB (as opposed to plain old HTML) &mdash; largely &mdash; when you see these <code>&lt;%= something here  %&gt;</code>. And what are those? Interpolation points, much like these in basic Ruby <code>#{}</code>. They&rsquo;re kind of like little portals through which you can make contact with and access the resources of another planet (i.e language, i.e Ruby). Think Stargate.</p>
+
+<p><img src="http://images1.wikia.nocookie.net/__cb20111213180223/stargate/images/b/bf/Stargate.JPG" height="430" width="530"/></p>
+
+<br>
+
+
+
+
+<h3>2. SQLITE vs. SQL vs. SEQUEL</h3>
+
+
+<p>Seriously, why do they all have to sound the same?! Especially when they&rsquo;re all such distinct entities. Guess we should start with Sqlite. Thanks to Scott C. Reynolds for the following analogies.</p>
+
+<h3>Sqlite</h3>
+
+
+<p>This is a database management system, or DBMS. It like, lets you store and save stuff and delete stuff (also known as &lsquo;data persistence&rsquo; and CRUD). In the context of Halloween, since it&rsquo;s Halloween today, Sqlite is a  garage littered with knick knacks that you&rsquo;re further using to store Halloween decorations. Other similar DBMS&#8217;  that fit this analogy include MySQL and PostgreSQL (<a href="https://www.anchor.com.au/hosting/dedicated/mysql_vs_postgres">not a very pretty but still helpful comparison between the two</a>). To make a distinction, however, if Sqlite is a 2-car garage, then MySQL is a 10-car garage.</p>
+
+<p><img src="http://www.halloweenforum.com/attachments/sale-trade-individuals/171799d1379541614-halloween-decoration-garage-sale-southeast-wisconsin-005.jpg" /></p>
+
+<h3>SQL (Structured Query Language)</h3>
+
+
+<p>As its full name suggests, SQL is a language. Just like HTML and Ruby and Python and Javascript are languages &mdash; so is SQL. It is not a gem. It is not the database itself. SQL IS A LANGUAGE. You&rsquo;re using SQL when you type stuff like <code>SELECT * FROM &lt;table_name&gt;</code>. And to continue the Halloween/garage analogy, hard coding SQL to get stuff in and out of your database is a little like going out of your way to poke around through all the crap sitting in your garage to find and retrieve a ball of tangled Halloween lights. There&rsquo;s a need to get the lights (i.e the data), yes, but this way of doing it is tedious.</p>
+
+<p><img src="http://www.nachi.org/forum/attachments/f13/25452-end-christmas-lights-tangled-frustrations-dscn2187.jpg" height="430" width="530"/></p>
+
+<h3>Sequel</h3>
+
+
+<p>And this is where Sequel comes in. Sequel is an ORM, or Object Relational Mapper, which is just a fancy way of saying &lsquo;the common ground between two different languages&rsquo; &mdash; namely, SQL and Ruby. Other ORMs include ActiveRecord and DataMapper (<a href="http://wrangl.com/datamapper-activerecord">a helpful comparison between the two</a>). Sequel is just another one of these ORM things. And to beat the Halloween analogy to death, using Sequel in place of SQL is like relaxing on your porch with a pumpkin beer while you get the neighbor kid to go into your garage, find the lights, and bring them out to you nice and untangled. You don&rsquo;t care how he did it &mdash; all you know is you asked the kid to do something, and it was done. Nice.</p>
+
+<p><img src="http://3.bp.blogspot.com/-sMe56vxBovI/T85su7WdtwI/AAAAAAAAALE/wT3A5Tpct6k/s640/RW_corfield_beer.jpg" height="430" width="530"/></p>
+
+<br>
+
+
+
+
+<h3>3. M-V-C (Model View Controller)</h3>
+
+
+<p>I don&rsquo;t have a Halloween analogy for this.</p>
+
+<p>Jeff Atwood actually has a great explanation of the Model-View-Controller paradigm right <a href="http://www.codinghorror.com/blog/2008/05/understanding-model-view-controller.html">here</a>. To summarize his version, the model contains the logic and data of your web application; the view is how you display your data and web application; and the controller, though a little more complicated, is the link between the user and the system behind your web application. How it all works together? I like to think of the M-V-C model as an elaborate and meticulously-arranged domino chain that behaves in an expected way from one trigger or initiation point. If you&rsquo;ve designed and coded all your moving parts to work properly together, then one file with a single command should be able to kickstart the whole application. Your finger pushing that first domino would be the equivalent of a runner file, or something similar.</p>
+
+<p><img src="http://i1.ytimg.com/vi/3fPzMiBN1AA/hqdefault.jpg" height="430" width="530"></p>
+
+<br>
+
+
+<p>I&rsquo;m going to keep adding to this list as I feel inspired.</p>
+
+<p>At the very least, I hope you&rsquo;ll come away from this post feeling confident that you&rsquo;ll never confuse Sqlite, SQL, and Sequel EVER AGAIN!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[.zip and Hash[] are Really Handy]]></title>
