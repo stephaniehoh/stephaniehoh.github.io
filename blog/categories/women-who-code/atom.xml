@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: women who code | stephanie writes code]]></title>
+  <link href="http://stephaniehoh.github.io/blog/categories/women-who-code/atom.xml" rel="self"/>
+  <link href="http://stephaniehoh.github.io/"/>
+  <updated>2013-11-07T02:24:31-05:00</updated>
+  <id>http://stephaniehoh.github.io/</id>
+  <author>
+    <name><![CDATA[Stephanie Oh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Myth of 'I Can't Code']]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/11/06/the-myth-of-i-cant-code/"/>
+    <updated>2013-11-06T22:40:00-05:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/11/06/the-myth-of-i-cant-code</id>
+    <content type="html"><![CDATA[<p>This past Friday, my Ruby-003 cohorts and I hit the halfway point of our time as students at the Flatiron School. Halfway points are &mdash; by nature of being, well, halfway between the start and the end &mdash; always a bittersweet thing. They&rsquo;re also an opportune time for reflection. So before it becomes too far off from the halfway point to be a meaningful post, I wanted to share some reflections on my journey thus far into programming.</p>
+
+<p>Or more accurately, I should say, my ongoing battle with programming.</p>
+
+<p>Because the truth is, it&rsquo;s felt more like a struggle and raging internal war these last six weeks than anything else. And what exactly have I been struggling with and/or against?</p>
+
+<h4>Ridiculous self-expectations</h4>
+
+
+<p>It&rsquo;s really, really easy to be hard on yourself at the Flatiron School. Why? Because you&rsquo;re surrounded by highly intelligent, highly motivated people day in and day out. Everyone comes from varying degrees of prior exposure and experience with coding. And whether there is any rational sense or not, as a complete novice, in expecting to learn things as quickly as others who have had more exposure or experience, or even learn things differently than you do &mdash; you do it anyway. You expect ridiculous things of yourself. Like &ldquo;why can&rsquo;t I build my own ruby gem already?&rdquo; when a day prior, you barely understood methods. Or &ldquo;how are my friends (AT OTHER BOOTCAMPS) able to build such cool things with rails (IN THEIR WEEK 7) while I can barely understand what rails IS??&rdquo; when a month prior, you didn&rsquo;t even know what an HTML tag was. Indeed, unreasonable self-expectations were a huge part of my struggle the first few weeks.</p>
+
+<h4>Impostor Syndrome</h4>
+
+
+<p>This is something we&rsquo;ve spoken about very candidly at Flatiron, and I&rsquo;m glad for it. Because it&rsquo;s one of those things that I never really had a proper name for but had felt in random spurts throughout my life, and once given the proper lexicon for it, could finally make sense of the feeling in the first place. Impostor syndrome. Where you feel like you don&rsquo;t really belong or deserve to belong to a particular group. That being, in this case, a combination of both the Flatiron School and the general world of programming as a whole. For the first few weeks, I thought surely that I had slipped through the admissions cracks; that I had duped everyone and somehow &ldquo;impostored&rdquo; my way into Flatiron. I felt this way due to a number of reasons, none of which were actually reasonable: I wasn&rsquo;t good at programming yet (of course I wasn&rsquo;t &mdash; I&rsquo;d never programmed in my life and I was here to learn!), I hadn&rsquo;t majored in Comp Sci in college (barely anyone else in the program had, either), I didn&rsquo;t know many, if ANY, keyboard shortcuts upon entering the program (because knowing keyboard shortcuts automatically makes one a good programmer&hellip;?), and I was/am a woman. Once again, being unreasonable with myself was largely responsible for my struggling.</p>
+
+<h4>The actual learning of programming and programming itself</h4>
+
+
+<p>Finally, we arrive at this point: the challenge and struggle of CODING ITSELF! Learning how to code is hard, period. For 99.9% of the world. There might be five people on the planet for whom learning how to code was/is &lsquo;just easy&rsquo;. So yes, learning how to code is hard enough on its own, but as you can surmise from the above, I&rsquo;d made it exponentially harder on myself to absorb or learn anything productively because my brain was already on such overload with totally unreasonable mental roadblocks. So much so, in fact, that I began to buy into the unfortunate myth of &lsquo;maybe I can&rsquo;t do it &mdash; maybe I just can&rsquo;t code&rsquo;.</p>
+
+<h4>The myth of 'maybe I just can't code'</h4>
+
+
+<p>This myth is, I think, the sum total of all of one&rsquo;s unreasonable internal voices combined with the point-blank fact that programming can indeed be a challenge to learn if you&rsquo;ve never done it before. JUST LIKE ANYTHING ELSE YOU&rsquo;RE NEW AT AND HAVE NEVER DONE BEFORE BUT WANT TO LEARN AND GET GOOD AT. It&rsquo;s funny how we underplay, too, the things we have become good at over the years in order to somehow justify harder that programming IS SO IMPOSSIBLE &ndash; MAYBE I JUST CAN&rsquo;T DO IT. Like playing the piano. I probably put in 12340918108241 hours of practice before I could play my first sonata &mdash; yet in far fewer hours, I&rsquo;ve learned enough Ruby and programming to build my own ruby gem. Equivalently, if anyone could study the piano for just 6 weeks and play a Mozart-ANYTHING, they&rsquo;d probably be considered a prodigy.</p>
+
+<p>So this notion that &lsquo;I can&rsquo;t code&rsquo; &mdash; based on your performance after just a handful of weeks &mdash; is just plain wrong. Okay fine, maybe you can&rsquo;t code AT XYZ LEVEL (yet). But that&rsquo;s the key distinction to make: yet. If you adopt a deterministic attitude about your current AND future coding abilities based on your present noobness, i.e you decide &ldquo;I&rsquo;m not good 3 weeks into this so I&rsquo;ll NEVER be good&rdquo;&hellip; well, it already sounds ridiculous, doesn&rsquo;t it? Especially when, as long as you keep learning and keep trying, it&rsquo;s literally impossible to maintain your noobness forever. Which is to say, eventually you get better. Until you&rsquo;re good. Maybe even great.</p>
+
+<p>Anyhow, after being unreasonably hard on my psyche and emotions the first four weeks or so, a weird thing happened around week five: I finally gave in to learning. That sounds weird to say, because it wasn&rsquo;t for lack of trying that I didn&rsquo;t feel like I was really LEARNING weeks one through four. More than likely, I was learning just as much that entire time &mdash; but every little thing came harder and felt more uncomfortable. Because I was familiarizing myself with a completely new domain for the first time! And just trying to build enough of a foundation that I could eventually start picking up on patterns. And I think that&rsquo;s what finally happened around week five; I started seeing and anticipating, on a very basic level, some of the patterns in programming.</p>
+
+<br>
+
+
+<p>Back full circle to the present: the halfway point. Halfway into my time at Flatiron (and just a short minute into a much longer lifetime of programming), I know how to use both git and github to maximize not only my individual workflow, but a group workflow; I feel weird if I&rsquo;m ever using my GUI instead of living and breathing in my Terminal; I&rsquo;ve scraped various websites including Netflix.com and RottenTomatoes.com for fun projects like a command-line game that I helped present at a NYC Rails Meetup; I know the difference between SQL, Sequel, and Sqlite and that both the Sinatra and Rails frameworks are built on top of Rack; I can build a basic Sinatra application and convert all the code into a Rails version of the application; I have a much better intuition about project directory structures and can thus guess where to find specific files better &mdash; i.e I was able to further customize this blog template today by downloading and adding social media icons. Did I mention that I pushed my first gem to rubygems.org this afternoon?</p>
+
+<p>There&rsquo;s still a lot I have to review, and a lot that I have to practice so that I don&rsquo;t get rusty. Let alone the vast universe of stuff I still have to learn. But it&rsquo;s important to remind ourselves of our victories sometimes, too. Because they keep us motivated, and keep us pushing.</p>
+
+<p>These are my reflections on the first six weeks. They were hard as hell.</p>
+
+<p>And I can&rsquo;t wait for the next six.</p>
+]]></content>
+  </entry>
+  
+</feed>
