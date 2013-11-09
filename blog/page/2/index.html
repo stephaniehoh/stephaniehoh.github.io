@@ -9,7 +9,7 @@
   <meta name="author" content="Stephanie Oh">
 
   
-  <meta name="description" content="When we&rsquo;re fluent in a language, we take for granted everything about it that feels intuitive. Ever feel that way when asked something specific &hellip;">
+  <meta name="description" content="I wanted to write up a short addendum to my previous post, &ldquo;Ruby: Just Set It. Just Say It&rdquo; and show you a simple example of refactoring &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,144 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/11/refactoring-using-%7C%7C-equals/">Refactoring Using ||=</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-11T10:14:00-04:00" pubdate data-updated="true">Oct 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wanted to write up a short addendum to my previous post, &ldquo;Ruby: Just Set It. Just Say It&rdquo; and show you a simple example of refactoring.</p>
+
+<p>What is refactoring, you ask?</p>
+
+<p>In my mind, it&rsquo;s a little like editing your writing. Your first draft might be an incoherent mess, but at least you got your thoughts out. From there, it&rsquo;s your responsibility as a writer to clean up your work so that it best conveys what you mean to say FROM YOUR READERS&#8217; PERSPECTIVE. Likewise, refactoring your code is a kind of clean-up process. It shouldn&rsquo;t change your program&rsquo;s external behavior, i.e the final output shouldn&rsquo;t be changing, but HOW your program gets there should have effectively changed.</p>
+
+<p>I guess this is a little different than editing your writing, in that the former is to better serve the consumer &mdash; the reader; refactoring code, on the other had, doesn&rsquo;t yield any new outcome to the consumer &mdash; the user. However, refactoring does make your code more readable to OTHER CODERS. Which can ultimately mean that future de-bugging efforts will be less painful. That, and you should take pride in your code! Make it as readable, logical, and elegant as possible &mdash; you wouldn&rsquo;t do any differently in your writing, would you??</p>
+
+<p>With that said, here&rsquo;s a side-by-side comparison of my code for the pigeon organizer exercise, pre and post refactoring:</p>
+
+<h4>PRE-REFACTORING, USING &#8216;IF ELSE&#8217; LOGIC</h4>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pigeon_list</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">property</span><span class="p">,</span> <span class="n">property_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">property_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">values</span><span class="p">,</span> <span class="n">birds_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">birds_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">property</span><span class="o">]</span> <span class="o">=</span> <span class="n">values</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">pigeon_list</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">property</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">values</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h4>POST-REFACTORING, USING THE ||= OPERATOR</h4>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">arranged_pigeon_hash</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">pigeon_data</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="n">value_hash</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">value_hash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">traits</span><span class="p">,</span> <span class="n">names_array</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">names_array</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">arranged_pigeon_hash</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">||=</span> <span class="p">{</span> <span class="n">attribute</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">traits</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">arranged_pigeon_hash</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">attribute</span><span class="o">]</span> <span class="o">||=</span> <span class="n">traits</span>
+</span><span class='line'>          <span class="n">arranged_pigeon_hash</span><span class="o">[</span><span class="nb">name</span><span class="o">][</span><span class="n">attribute</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">traits</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The outcome is the same either way, but the refactored version saves me a few lines of code and ultimately captures the logic behind the solution better.</p>
+
+<p>What the ||= operator does, in a nutshell, is evaluates whatever&rsquo;s on the LEFT side of the operator first. If that condition returns &lsquo;true&rsquo;, then the program proceeds to the next line of code, and so on. If the condition is &lsquo;false&rsquo;, then whatever&rsquo;s on the RIGHT side of the operator is assigned as the value of the left side.</p>
+
+<p>Cool, right?!</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Write code that works first. Then refactor it.</li>
+<li>Refactoring should&rsquo;t change the final outcome of your program; it should just help your program get there more efficiently, and make your code more readable to OTHER CODERS</li>
+<li>The ||= (&ldquo;or or equals&rdquo;) operator is a cool alternative to using &lsquo;if else&rsquo; logic, if you intend for some part of your program to handle new assignment (i.e values to keys, etc.)</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -799,49 +937,9 @@ and<br>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/24/hello-world/">Hello World. It&#8217;s Stephanie.</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-24T22:27:00-04:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I completed day two at the Flatiron School today. My head is spinning with all the new concepts and terminology I&rsquo;ve been trying to absorb from the last 48 hours &mdash; deploying, raking, branching, rebasing, adding, committing, and merging. Everything is sort of merging into git-soup, at the moment.</p>
-
-<p>But I learned some handy keyboard shortcuts that I can wrap my head&hellip; err, fingers around. Like command + tab to navigate around my open applications. And command + space to summon Spotlight. It sounds silly, but I didn&rsquo;t used to know these things. I&rsquo;ve learned more about my computer in the last two days than I ever have.</p>
-
-<p>Goodbye, track pad?</p>
-
-<p>Hello world.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -854,6 +952,10 @@ and<br>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/">5 Simple Tips/Lessons from Gem-Building</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/06/the-myth-of-i-cant-code/">The Myth of &#8216;I Can&#8217;t Code&#8217;</a>
@@ -869,10 +971,6 @@ and<br>
     
       <li class="post">
         <a href="/blog/2013/10/12/lost-in-translation-till-you-normalize/">Lost in Translation - &#8216;Till You Normalize</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/11/refactoring-using-%7C%7C-equals/">Refactoring Using ||=</a>
       </li>
     
   </ul>

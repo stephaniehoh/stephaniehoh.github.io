@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>5 Simple Tips/Lessons from Gem-Building - stephanie writes code</title>
+  <meta name="author" content="Stephanie Oh">
+
+  
+  <meta name="description" content="Two posts ago, I dropped a hint about a basic ruby gem I was trying to build. At the time, building one&rsquo;s own gem(s) seemed to be the de &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">stephanie writes code</a></h1>
+  
+    <h2>(For People Who Read English Good)</h2>
+  
+
+  <br>
+
+  <a href="https://twitter.com/SostephOh" target="_blank"><img src="/assets/icons/256/Twitter.png" height="40" width="40"></a>
+
+  <a href="https://github.com/stephaniehoh" target="_blank"><img src="/assets/icons/256/Gittub.png" height="40" width="40"></a>
+
+  <a href="http://www.linkedin.com/pub/stephanie-oh/22/537/389" target="_blank"><img src="/assets/icons/256/Linkedin.png" height="40" width="40"></a>
+
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:stephaniehoh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://flatironschool.com/" target="_blank">Flatiron School</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">5 Simple Tips/Lessons From Gem-Building</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-09T03:01:00-05:00" pubdate data-updated="true">Nov 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Two posts ago, I dropped a hint about a basic ruby gem I was trying to build. At the time, building one&rsquo;s own gem(s) seemed to be the <em>de rigueur</em> object of our collective fascination at Flatiron. I guess that&rsquo;s because we were all itching to start building things, and we hadn&rsquo;t yet begun to learn Rails.</p>
+
+<p>So I&rsquo;m a little late to our gem-party, but I&rsquo;m so happy I gave it a go (better late than never, right? Cue: mental reminders about &lsquo;unrealistic self-expectations&rsquo;). Because inevitably, the thing you learn most about through the process of gem-building &mdash; as is the case with absolutely anything you&rsquo;ll ever build with code &mdash; is git.</p>
+
+<p>Only joking.</p>
+
+<p>But really, I did actually learn an unexpected amount more about git. And with that said, since everyone loves lists, here&rsquo;s a list of 5 simple tips and lessons from my personal experience with ruby gem-building:</p>
+
+<br>
+
+
+
+
+<h3>1. Just start with the RubyGems Guide. Like, seriously.</h3>
+
+
+<p>Don&rsquo;t waste hours debating your starting point. Just start with the <a href="http://guides.rubygems.org/make-your-own-gem/">RubyGems Guide</a>. Having done precisely the opposite &mdash; I ditched the guide in favor of a Treehouse video tutorial then got confused and ended up coming back to the guide &mdash; I know now that the RubyGems Guide is actually the easiest thing to follow. It walks you through the process of building a simple &ldquo;Hello World!&rdquo; gem, and without having to worry much at all about project directories or structure, you can build and ship your first ruby gem in about 15 minutes.</p>
+
+<h3>2. Then try a tutorial, like this one</h3>
+
+
+<p>Once you&rsquo;ve familiarized yourself a bit with basic directory organization and in which directories stuff should go, you can then follow along with <a href="http://blog.teamtreehouse.com/how-to-build-a-ruby-gem-with-guest-sam-soffes">this Treehouse tutorial</a> to build your real gem. The main reason I suggest you wait until you&rsquo;ve practiced with the RubyGems Guide first before diving into a tutorial like this one is that the latter instructs you to run this simple command as your starting point:</p>
+
+<p><code>bundle gem &lt;the name of your gem&gt;</code></p>
+
+<p>This will perform a bit of magic for you &mdash; not unlike the Rails/DHH magic we have at our disposal with the <code>rails g scaffold &lt;the name of your project&gt;</code> command &mdash; and instantly create a bunch of directories with files that have placeholder text and stuff in them. While this might sound totally awesome, it can also be confusing to use this as your starting point because you won&rsquo;t know why things have been set up the way they have. Which is to say, it will be harder for you to customize stuff to suit your needs &mdash; because you won&rsquo;t know what&rsquo;s going to cause the whole thing to break and what&rsquo;s okay to change.</p>
+
+<p>So build your directories and files from the ground up yourself first (following the RubyGems Guide), THEN take advantage of shortcuts like <code>bundle gem &lt;the name of your gem&gt;</code>.</p>
+
+<h3>3. Don&#8217;t forget, you&#8217;re using git</h3>
+
+
+<p>If you do go off of the <code>bundle gem</code> shortcut, be aware: it initializes a git repo in your project directory automatically.</p>
+
+<p><img src="/assets/screenshots/git_init_ruby_gems.png"></p>
+
+<p>Yes. Look at the last line! <code>Initializing git repo...</code> it says. Somehow, I didn&rsquo;t pay attention to this detail, so later down the road when I pushed my first version of the gem up to rubygems then instantly realized I had to make an edit and push up a new version, I ran into a huge wall. I kept getting error messages that said something along the lines of &ldquo;[some_file_name, some_other_file_name] are not files&rdquo;. And I thought &ldquo;WHY??! WHAT DO YOU MEAN THEY AREN&rsquo;T FILES? I&rsquo;VE SAVED EVERYTHING, I CAN SEE THEM IN MY DIRECTORIES, THEY EXIST! OF COURSE THEY&rsquo;RE FILES!!&rdquo;</p>
+
+<p>Well. Turns out, my computer wanted me to do a <code>git add .</code> and <code>git commit</code>  before I could proceed with pushing up new gem versions. This is because the <code>bundle gem &lt;the name of my gem&gt;</code> shortcut initialized a git repo for me, which meant I had to start tracking my changes. The fact that I&rsquo;d forgotten this and/or hadn&rsquo;t paid attention to the activity in my console from the get-go didn&rsquo;t change the fact that I now had to answer to git.</p>
+
+<h3>4. Make sure your gem-name isn&#8217;t already taken</h3>
+
+
+<p>The problem I ran into above (and the subsequent 3 hours of de-bugging) was all due to this basic mistake: I&rsquo;d forgotten to make sure my gem name wasn&rsquo;t already taken. So after building everything and trying to run <code>gem push &lt;my gem&gt;</code>, I was promptly denied. This forced me to have to go back and make a lot of changes, including RENAMING MY GEM.</p>
+
+<p>So just check first on RubyGems.org that your gem name hasn&rsquo;t already been taken! And don&rsquo;t assume, like I did, that it&rsquo;s necessarily something more complicated &mdash; like an error with my API-key (I ran around in circles trying to &lsquo;fix&rsquo; that for a while, when that was never the issue to begin with). It&rsquo;s really easy to get excited and just start building, and equally easy to jump to crazy conclusions as to where and how you should start debugging your errors.</p>
+
+<h3>5. Handle your gemspec with care</h3>
+
+
+<p>Your gemspec is not just some random file you can treat as an afterthought (as is often done unfortunately with README files, for example), just because it doesn&rsquo;t live in the &lsquo;all-important&rsquo; lib or bin directories. Your gemspec file is literally the roadmap TO YOUR GEM, or a blueprint, rather. It contains tons of valuable information such as your gem&rsquo;s version number, executables, and run-time dependencies, to name a few.</p>
+
+<p>Furthermore, as you can see, when you actually run the <code>gem build &lt;yourgemname.gemspec&gt;</code> command to BUILD your gem, you have to build it off of the gemspec! It&rsquo;s just convention. Needless to say, your gemspec file is important. Update it, make sure it contains accurate information, and treat it with care.</p>
+
+<p>================================================================</p>
+
+<p>All of that said, I had a lot of fun building my first gem. Special shoutout to our TA Spencer Rogers for helping me de-bug and ultimately realize that my 3-hour roadblock had, in fact, stemmed 100% from git troubles.</p>
+
+<p>My gem is called <code>billboard_chart</code>.</p>
+
+<p>You can install it by running <code>gem install billboard_chart</code>.</p>
+
+<p>Then simply type <code>billboard_chart</code> to see what happens!</p>
+
+<p>(NOTE: 24 hours after I published my gem, Billboard.com decided to switch up some of their CSS selectors so now the scraper generating my data &mdash; I used Nokogiri &mdash; is acting funny, which means the data also looks a bit funny now. Looks like I now have some ACTUAL de-bugging to do!!!)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-09T03:01:00-05:00" pubdate data-updated="true">Nov 9<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/build-your-own-gem/'>build your own gem</a>, <a class='category' href='/blog/categories/gems/'>gems</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/06/the-myth-of-i-cant-code/" title="Previous Post: The Myth of 'I Can't Code'">&laquo; The Myth of 'I Can't Code'</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/">5 Simple Tips/Lessons from Gem-Building</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/06/the-myth-of-i-cant-code/">The Myth of 'I Can't Code'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/31/easy-analogies-to-demistify-web-app-jargon/">Easy Analogies to Demistify Web Application Jargon</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/18/dot-zip-and-hash-are-really-handy/">.zip and Hash[] are Really Handy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/lost-in-translation-till-you-normalize/">Lost in Translation - 'Till You Normalize</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'stephaniehoh',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephanie Oh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
