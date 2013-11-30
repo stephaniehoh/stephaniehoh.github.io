@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rails in 15 Minutes - stephanie writes code</title>
+  <meta name="author" content="Stephanie Oh">
+
+  
+  <meta name="description" content="It&rsquo;s been about 4 weeks since we began learning Rails, and two of those weeks we&rsquo;ve spent in manic project mode. Manic in a good way, of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/11/29/rails-in-15-minutes">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">stephanie writes code</a></h1>
+  
+    <h2>(For People Who Read English Good)</h2>
+  
+
+  <br>
+
+  <a href="https://twitter.com/SostephOh" target="_blank"><img src="/assets/icons/256/Twitter.png" height="40" width="40"></a>
+
+  <a href="https://github.com/stephaniehoh" target="_blank"><img src="/assets/icons/256/Gittub.png" height="40" width="40"></a>
+
+  <a href="http://www.linkedin.com/pub/stephanie-oh/22/537/389" target="_blank"><img src="/assets/icons/256/Linkedin.png" height="40" width="40"></a>
+
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:stephaniehoh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://flatironschool.com/" target="_blank">Flatiron School</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Rails in 15 Minutes</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-29T01:01:00-05:00" pubdate data-updated="true">Nov 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://selleo.com/blog/wp-content/uploads/2013/06/Ruby_on_Rails_logo.jpg" height="220" width="150" style="display: block; margin-left: auto; margin-right: auto;"></p>
+
+<p>It&rsquo;s been about 4 weeks since we began learning Rails, and two of those weeks we&rsquo;ve spent in manic project mode. Manic in a good way, of course &mdash; as in everyone has been relentlessly devoted to building Rails-based web applications (which has also forced many of us to learn WAY more about AJAX and jQuery on the fly than we ever thought possible in such a short amount of time, especially in tandem with learning an entire framework from the ground up). I think what I&rsquo;m hinting at is: major brain overload (or brain&hellip; overflow? sorry &mdash; terrible joke).</p>
+
+<p>I take it for granted now that I occasionally have to battle my instance variables when using <code>form_for</code>s or forget to set <code>before_action</code>s. Because not too long ago, in a very serious way, I literally had <em>no idea what Rails was</em>.</p>
+
+<p>Sure, I&rsquo;d heard and read multiple times that Rails &ldquo;is a framework for building web applications&rdquo;. But what, then, was a framework? How did Ruby fit into it? Were Rails and Ruby on Rails the same thing? I had so many questions prior to these last 4 weeks, and though many had recommended Code School&rsquo;s <a href="http://railsforzombies.org/">Rails for Zombies</a> series, I just couldn&rsquo;t get into it.</p>
+
+<p>So hopefully, the following breakdown is helpful to anyone who&rsquo;s just embarking upon their soon-to-be awesome journey into Rails:</p>
+
+<br>
+
+
+
+
+<h3>Okay, so what is Rails?</h3>
+
+
+<p>Rails is a framework for building web applications.</p>
+
+<p>Just kidding.</p>
+
+<p>Well, that&rsquo;s actually true, but I&rsquo;m going to attempt a better explanation because that one is vague and unhelpful. To begin, I&rsquo;d like to share a few broad (as in, not specific to code or programming) definitions of the word &lsquo;framework&rsquo; that I think best apply to the context of Rails:</p>
+
+<div style="border: solid black 1px; padding: 30px; background: #eee">
+
+  <strong>framework</strong> [ˈfreɪmˌwɜːk]
+  <em>n</em>
+
+  <br>
+  <br>
+
+  <ol>
+    <li>A skeletal structure designed to support or enclose something else</li>
+    <li>A set of concepts, assumptions, values, and practices that constitutes a way of viewing reality</li>
+  </ol>
+
+</div>
+
+
+
+
+<br>
+
+
+<p>Okay, now keep those definitions on a mental back-burner. Because they apply to Rails in the sense that they help add brushstrokes and color to the overall picture, but neither of those definitions alone is entirely helpful in grasping &mdash; at the most basic level &mdash; what Rails IS.</p>
+
+<p>As simply and literally put as possible, Rails is a kind of software, or &lsquo;magic kit&rsquo;, that you download locally on your computer via one simple command in your terminal (assuming you already have the RubyGems packaging system): <code>gem install rails</code>. Once you&rsquo;ve installed it, Rails provides you with a whole bunch of functionality so that you can efficiently start building web applications. In other words, there&rsquo;s a vast library behind the scenes (i.e the Rails source code) into which a lot of complex methods and logic have been defined and pre-coded by some really smart people (like <a href="http://david.heinemeierhansson.com/">this guy</a>) so that you don&rsquo;t have to; instead, you can type some simple commands like <code>rails new [project name]</code> or <code>rails generate scaffold [model]</code>, and Rails will respond to them.</p>
+
+<br>
+
+
+
+
+<h3>Now, how exactly is Rails like a &#8216;framework&#8217;?</h3>
+
+
+<p>To relate this back to the above definitions, rails is a framework in the sense that its many built-in shortcuts will magically create skeletal structures (organized directories, basic routes, empty models with their corresponding migrations, etc.) for you to fill in with further details, i.e code and logic. It also encapsulates its creator(s)&lsquo; values, assumptions, and opinions on programming best-practices, i.e THEIR way of viewing &#8216;reality&rsquo;.</p>
+
+<p>One of the most definitive illustrations of how &lsquo;framework-like&rsquo; Rails is is the directory structure you instantly get after running <code>rails new [project name]</code>. Something like 30 directories come pre-organized, nested and labeled for you &mdash; and some even contain files with pre-written CODE! Thus, rather than leave it up to each individual programmer to organize his or her directories in whatever way he/she deemed fit, the masterminds behind Rails decided to take choice out of the equation and hammer home instead a pre-determined layout to encourage convention. Their values and assumptions are clearly at play here. And though it may sound stiff and undemocratic at first, once you use Rails to build stuff (and conversely, have to jump into other people&rsquo;s Rails projects &mdash; oftentimes to debug), you&rsquo;ll realize how time-saving and mental energy-saving these baked-in conventions truly are. So thank you, DHH, for having an opinion!</p>
+
+<br>
+
+
+
+
+<h3>So you can build real web apps in fewer than 5 lines of code??</h3>
+
+
+<p>Well, sort of. Five lines of code will get you some basic CRUD functionality, but that&rsquo;s about it.</p>
+
+<p>Unfortunately, while Rails&#8217; out-of-the-box mileage is great, it isn&rsquo;t really going to cut it when you have to build anything for real. That is, any serious web application you build using Rails is going to require a lot of customization, i.e you&rsquo;re going to need to read quite a bit of <a href="http://guides.rubyonrails.org/getting_started.html">Rails documentation</a> and learn how it&rsquo;s really used &mdash; and knowing the Ruby language will really help here.</p>
+
+<p>A lot of well-known sites and applications do use Rails, including some you may have heard of: Shopify, Twitter, Github, and more.</p>
+
+<p>Exicted to start Rails-ing, much?</p>
+
+<p>(If the answer is &lsquo;YES!&rsquo;, then I suggest starting <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book#top">here</a>, with Michael Hartl&rsquo;s free Rails tutorial. It&rsquo;s super step-by-step, controlled, and well-explained every step of the way. He also ties in some Git and Heroku, which is a nice touch because it helps contextualize all the other stuff you&rsquo;ll actually come in contact with when you use Rails for real. And personally, I say skip the Rails guide for now until you&rsquo;ve had some practice going through the motions, <em>a la</em> Hartl&rsquo;s tutorial. Otherwise, you&rsquo;ll have no context. Besides, guides are best used in general for &ldquo;sandboxed queries&rdquo; &mdash; once you have an idea of something specific you need an answer to).</p>
+
+<br>
+
+
+
+
+<h3>Are &#8216;Rails&#8217; and &#8216;Ruby on Rails&#8217; the same thing?</h3>
+
+
+<p>Yes.</p>
+
+<p>Rails is simply the shorthand version of saying it; Ruby on Rails is the same thing.</p>
+
+<br>
+
+
+
+
+<h3>How does Ruby fit into it?</h3>
+
+
+<p>Rails/Ruby on Rails was built using the Ruby programming language, and thus also runs on Ruby. That&rsquo;s a pretty direct way in which Ruby &lsquo;fits into the picture&rsquo;. And as mentioned above, any customization and/or granular manipulation of your Rails-based web application is going to require some real knowledge of Ruby; you don&rsquo;t need to be an expert, but much of what you want to accomplish and much of the control over what data you choose to display (or not display) is going to rely on basic Ruby stuff like the <code>.each</code> method, <code>if else</code> logic, etc.</p>
+
+<p>(If you want recommendations on free beginner Ruby resources, I personally like <a href="http://codecademy.com/tracks/ruby">Codecademy</a>, <a href="http://rubymonk.com/">RubyMonk</a>, and Chris Pine&rsquo;s <a href="http://pine.fm/LearnToProgram/">Learn to Program</a>.)</p>
+
+<br>
+
+
+<p>I think that was approximately 15 minutes&#8217; worth of reading?</p>
+
+<p>Happy Rails-ing!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-29T01:01:00-05:00" pubdate data-updated="true">Nov 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby-on-rails/'>ruby on rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/11/29/rails-in-15-minutes/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/11/29/rails-in-15-minutes/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/" title="Previous Post: 5 Simple Tips/Lessons from Gem-Building">&laquo; 5 Simple Tips/Lessons from Gem-Building</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/29/rails-in-15-minutes/">Rails in 15 Minutes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/">5 Simple Tips/Lessons from Gem-Building</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/06/the-myth-of-i-cant-code/">The Myth of 'I Can't Code'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/31/easy-analogies-to-demistify-web-app-jargon/">Easy Analogies to Demistify Web Application Jargon</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/18/dot-zip-and-hash-are-really-handy/">.zip and Hash[] are Really Handy</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'stephaniehoh',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephanie Oh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

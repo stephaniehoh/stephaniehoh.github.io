@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby on rails | stephanie writes code]]></title>
+  <link href="http://stephaniehoh.github.io/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
+  <link href="http://stephaniehoh.github.io/"/>
+  <updated>2013-11-29T22:44:20-05:00</updated>
+  <id>http://stephaniehoh.github.io/</id>
+  <author>
+    <name><![CDATA[Stephanie Oh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rails in 15 Minutes]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/11/29/rails-in-15-minutes/"/>
+    <updated>2013-11-29T01:01:00-05:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/11/29/rails-in-15-minutes</id>
+    <content type="html"><![CDATA[<p><img src="http://selleo.com/blog/wp-content/uploads/2013/06/Ruby_on_Rails_logo.jpg" height="220" width="150" style="display: block; margin-left: auto; margin-right: auto;"></p>
+
+<p>It&rsquo;s been about 4 weeks since we began learning Rails, and two of those weeks we&rsquo;ve spent in manic project mode. Manic in a good way, of course &mdash; as in everyone has been relentlessly devoted to building Rails-based web applications (which has also forced many of us to learn WAY more about AJAX and jQuery on the fly than we ever thought possible in such a short amount of time, especially in tandem with learning an entire framework from the ground up). I think what I&rsquo;m hinting at is: major brain overload (or brain&hellip; overflow? sorry &mdash; terrible joke).</p>
+
+<p>I take it for granted now that I occasionally have to battle my instance variables when using <code>form_for</code>s or forget to set <code>before_action</code>s. Because not too long ago, in a very serious way, I literally had <em>no idea what Rails was</em>.</p>
+
+<p>Sure, I&rsquo;d heard and read multiple times that Rails &ldquo;is a framework for building web applications&rdquo;. But what, then, was a framework? How did Ruby fit into it? Were Rails and Ruby on Rails the same thing? I had so many questions prior to these last 4 weeks, and though many had recommended Code School&rsquo;s <a href="http://railsforzombies.org/">Rails for Zombies</a> series, I just couldn&rsquo;t get into it.</p>
+
+<p>So hopefully, the following breakdown is helpful to anyone who&rsquo;s just embarking upon their soon-to-be awesome journey into Rails:</p>
+
+<br>
+
+
+
+
+<h3>Okay, so what is Rails?</h3>
+
+
+<p>Rails is a framework for building web applications.</p>
+
+<p>Just kidding.</p>
+
+<p>Well, that&rsquo;s actually true, but I&rsquo;m going to attempt a better explanation because that one is vague and unhelpful. To begin, I&rsquo;d like to share a few broad (as in, not specific to code or programming) definitions of the word &lsquo;framework&rsquo; that I think best apply to the context of Rails:</p>
+
+<div style="border: solid black 1px; padding: 30px; background: #eee">
+
+  <strong>framework</strong> [ˈfreɪmˌwɜːk]
+  <em>n</em>
+
+  <br>
+  <br>
+
+  <ol>
+    <li>A skeletal structure designed to support or enclose something else</li>
+    <li>A set of concepts, assumptions, values, and practices that constitutes a way of viewing reality</li>
+  </ol>
+
+</div>
+
+
+
+
+<br>
+
+
+<p>Okay, now keep those definitions on a mental back-burner. Because they apply to Rails in the sense that they help add brushstrokes and color to the overall picture, but neither of those definitions alone is entirely helpful in grasping &mdash; at the most basic level &mdash; what Rails IS.</p>
+
+<p>As simply and literally put as possible, Rails is a kind of software, or &lsquo;magic kit&rsquo;, that you download locally on your computer via one simple command in your terminal (assuming you already have the RubyGems packaging system): <code>gem install rails</code>. Once you&rsquo;ve installed it, Rails provides you with a whole bunch of functionality so that you can efficiently start building web applications. In other words, there&rsquo;s a vast library behind the scenes (i.e the Rails source code) into which a lot of complex methods and logic have been defined and pre-coded by some really smart people (like <a href="http://david.heinemeierhansson.com/">this guy</a>) so that you don&rsquo;t have to; instead, you can type some simple commands like <code>rails new [project name]</code> or <code>rails generate scaffold [model]</code>, and Rails will respond to them.</p>
+
+<br>
+
+
+
+
+<h3>Now, how exactly is Rails like a 'framework'?</h3>
+
+
+<p>To relate this back to the above definitions, rails is a framework in the sense that its many built-in shortcuts will magically create skeletal structures (organized directories, basic routes, empty models with their corresponding migrations, etc.) for you to fill in with further details, i.e code and logic. It also encapsulates its creator(s)&lsquo; values, assumptions, and opinions on programming best-practices, i.e THEIR way of viewing 'reality&rsquo;.</p>
+
+<p>One of the most definitive illustrations of how &lsquo;framework-like&rsquo; Rails is is the directory structure you instantly get after running <code>rails new [project name]</code>. Something like 30 directories come pre-organized, nested and labeled for you &mdash; and some even contain files with pre-written CODE! Thus, rather than leave it up to each individual programmer to organize his or her directories in whatever way he/she deemed fit, the masterminds behind Rails decided to take choice out of the equation and hammer home instead a pre-determined layout to encourage convention. Their values and assumptions are clearly at play here. And though it may sound stiff and undemocratic at first, once you use Rails to build stuff (and conversely, have to jump into other people&rsquo;s Rails projects &mdash; oftentimes to debug), you&rsquo;ll realize how time-saving and mental energy-saving these baked-in conventions truly are. So thank you, DHH, for having an opinion!</p>
+
+<br>
+
+
+
+
+<h3>So you can build real web apps in fewer than 5 lines of code??</h3>
+
+
+<p>Well, sort of. Five lines of code will get you some basic CRUD functionality, but that&rsquo;s about it.</p>
+
+<p>Unfortunately, while Rails' out-of-the-box mileage is great, it isn&rsquo;t really going to cut it when you have to build anything for real. That is, any serious web application you build using Rails is going to require a lot of customization, i.e you&rsquo;re going to need to read quite a bit of <a href="http://guides.rubyonrails.org/getting_started.html">Rails documentation</a> and learn how it&rsquo;s really used &mdash; and knowing the Ruby language will really help here.</p>
+
+<p>A lot of well-known sites and applications do use Rails, including some you may have heard of: Shopify, Twitter, Github, and more.</p>
+
+<p>Exicted to start Rails-ing, much?</p>
+
+<p>(If the answer is &lsquo;YES!&rsquo;, then I suggest starting <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book#top">here</a>, with Michael Hartl&rsquo;s free Rails tutorial. It&rsquo;s super step-by-step, controlled, and well-explained every step of the way. He also ties in some Git and Heroku, which is a nice touch because it helps contextualize all the other stuff you&rsquo;ll actually come in contact with when you use Rails for real. And personally, I say skip the Rails guide for now until you&rsquo;ve had some practice going through the motions, <em>a la</em> Hartl&rsquo;s tutorial. Otherwise, you&rsquo;ll have no context. Besides, guides are best used in general for &ldquo;sandboxed queries&rdquo; &mdash; once you have an idea of something specific you need an answer to).</p>
+
+<br>
+
+
+
+
+<h3>Are 'Rails' and 'Ruby on Rails' the same thing?</h3>
+
+
+<p>Yes.</p>
+
+<p>Rails is simply the shorthand version of saying it; Ruby on Rails is the same thing.</p>
+
+<br>
+
+
+
+
+<h3>How does Ruby fit into it?</h3>
+
+
+<p>Rails/Ruby on Rails was built using the Ruby programming language, and thus also runs on Ruby. That&rsquo;s a pretty direct way in which Ruby &lsquo;fits into the picture&rsquo;. And as mentioned above, any customization and/or granular manipulation of your Rails-based web application is going to require some real knowledge of Ruby; you don&rsquo;t need to be an expert, but much of what you want to accomplish and much of the control over what data you choose to display (or not display) is going to rely on basic Ruby stuff like the <code>.each</code> method, <code>if else</code> logic, etc.</p>
+
+<p>(If you want recommendations on free beginner Ruby resources, I personally like <a href="http://codecademy.com/tracks/ruby">Codecademy</a>, <a href="http://rubymonk.com/">RubyMonk</a>, and Chris Pine&rsquo;s <a href="http://pine.fm/LearnToProgram/">Learn to Program</a>.)</p>
+
+<br>
+
+
+<p>I think that was approximately 15 minutes' worth of reading?</p>
+
+<p>Happy Rails-ing!</p>
+]]></content>
+  </entry>
+  
+</feed>

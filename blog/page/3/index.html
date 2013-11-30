@@ -9,7 +9,7 @@
   <meta name="author" content="Stephanie Oh">
 
   
-  <meta name="description" content="I completed day two at the Flatiron School today. My head is spinning with all the new concepts and terminology I&rsquo;ve been trying to absorb from &hellip;">
+  <meta name="description" content="I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post &mdash; after Day 2 at Flatiron &mdash; I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,89 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/10/07/git-vs-github-for-dummies/">Git vs. GitHub for Dummies</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T15:46:00-04:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I meant to write this post last week, when I had my first Git/GitHub breakthrough. In my first post &mdash; after Day 2 at Flatiron &mdash; I bemoaned the fact that everything I&rsquo;d attempted to absorb about Git and Github had, by the end of the day, turned into unpalatable git soup. A week later, after enough exposure and repetition (and causing one too many merge conflicts), I was able to strain some method out of the git soup-madness.</p>
+
+<p>Let&rsquo;s start by establishing a key concept: <b>Git and GitHub ARE NOT THE SAME THING</b>.</p>
+
+<p>They&rsquo;re not??? But, like, programmers refer to them (seemingly) interchangeably!</p>
+
+<p>Nope. Still not the same. They work hand in hand, but this doesn&rsquo;t equate to&hellip;. sameness.</p>
+
+<h3>SO WHAT IS GIT?</h3>
+
+
+<p>Git can seem like total madness for a number of reasons, not the least of which because&hellip; well, GitHub&rsquo;s sheer existence. The latter has added a whole slew of very niche terminology to an already-extensive list of GIT-specific terminology: i.e, there&rsquo;s more shit to memorize. Anyway, you can think of Git as <b>a really awesome version-control software.</b> <b>You download it.</b> It lives <b>locally</b> on your computer. You run it <b>from your terminal</b>. You might be typing some Git-ish commands that look like this, from your command line:</p>
+
+<p><code>git init</code><br>
+<code>git add .</code><br>
+<code>git commmit -m "some witty message here"</code><br></p>
+
+<p>If you are, then you&rsquo;re using Git &mdash; NOT GitHub.</p>
+
+<p>And what exactly, by the way, is &ldquo;version-control software&rdquo;? It&rsquo;s basically just a handy program you install on your computer &ndash; just like when you download and install cool things like Skype &ndash; except you install Git from your command line. Which makes you really cool. Oh, and what it does: a million things. But two fundamental ideas are that:</p>
+
+<p>1) <b>Git allows you to save different &ldquo;versions&rdquo; of your work as you go</b> &mdash; via adds and commits. As long as you&rsquo;ve installed Git on your computer and you do a <code>git init</code> in whatever directory you&rsquo;ll be doing your work, you can start saving versions of your work. And &ldquo;work&rdquo; really means anything; it could be Photoshop edits, essay drafts, spreadsheet modifications, you name it. It just so happens that if you&rsquo;re a programmer, you&rsquo;ll mostly be using Git to keep track of all your versions of code.</p>
+
+<p>2) <b>Git lets you create and work on something called &lsquo;branches&rsquo;, which are basically parallel universes that you can switch back and forth out of interchangeably</b> &mdash; via <code>git checkout &lt;branch_name here&gt;</code>. If that&rsquo;s still confusing to you, imagine if you could make as many copies as you wanted of your EXISTENCE, i.e seven different parallel universes, and in each of them, you can run around and live out a different version of your life that you&rsquo;ve ever dreamed. When you feel like one particular universe has yielded the perfect outcome (you&rsquo;ve become the next Jay-Z, met the man of your dreams, have been elected President of the United States), you can throw away the other six and decide &ldquo;I ONLY WANT TO KEEP THE ONE WHERE I BECOME PRESIDENT.&rdquo; That&rsquo;s kind of how branches work. You get to make and work in as many as you want, and when you write code that you&rsquo;re happy with in any one of them, you can say, &ldquo;THIS IS THE BRANCH I WANT TO KEEP&rdquo; and throw the others away.</p>
+
+<p>Then we get into merging and pushing and some advanced Git topics that I&rsquo;ll chronicle in future posts (when I&rsquo;ve actually wrapped my head around them). But this poses a natural segueway into GitHub.</p>
+
+<h3>COOL. NOW WHAT&#8217;S GITHUB?</h3>
+
+
+<p>Remember how I said Git lives locally on your computer? Well, GitHub is the exact opposite: <b>it lives remotely, on the Internet.</b> That&rsquo;s right &mdash; as its name would suggest, GitHub is an online &lsquo;hub&rsquo; that some really smart dudes built so that programmers could share their code remotely and collaborate on projects at the same time. It&rsquo;s kind of like the flashstick/Dropbox analogy &mdash; sure, the flashstick was small and compact and mostly useful, but what if you wanted to access everything on your flashstick remotely? On the Internet? Especially if, like, you didn&rsquo;t have your flashstick with you?? Sorry, no can do. Until Dropbox came along! Suddenly, you could access ALL your files from any computer, as long as you had an Internet connection and as long as you&rsquo;d explicitly added those files to Dropbox! Similarly, I like to think that GitHub is to Git what Dropbox is to the flashstick (yes, I know this is an oversimplification but if you just think about the remote-access part of the analogy, it works).</p>
+
+<p>So if you&rsquo;ve got an Internet browser open, and you&rsquo;re typing &ldquo;www.github.com&rdquo; and hit enter, and you can see the Octocat mascot, you&rsquo;re using GitHub &mdash; NOT Git. And why is this distinction so important? Well, that&rsquo;s like asking why it&rsquo;s important to understand that the files on your computer won&rsquo;t be accessible remotely unless you MAKE them &lsquo;remote&rsquo; somehow, say, by uploading them to Dropbox. As long as you understand that <b>GitHub is a remote entity to which you&rsquo;re &lsquo;pushing&rsquo; (i.e uploading) stuff that would otherwise only exist locally</b>, you&rsquo;re in good shape.</p>
+
+<p>This will save you a lot of confusion and heartache down the road when you&rsquo;re wondering why stuff you&rsquo;re adding and committing locally isn&rsquo;t magically appearing online on GitHub (chances are, you did a <code>git init</code> locally first then forgot to create a &lsquo;pathway&rsquo; between your computer and GitHub via <code>git remote add origin &lt;some GitHub URL&gt;</code>).</p>
+
+<p>Anyway, I&rsquo;ll be doing more Git and GitHub posts down the road because I don&rsquo;t think any existing manuals on the Internet have really done an <em>excellent</em> job at illuminating how they work together (or explaining what they are, for that matter, hence this blog post). Even more egregious, in my opinion, is the lack of sensible visuals (most Git diagrams suck and have only confused me more) and the dearth in helpful analogies &mdash; so I&rsquo;ll try to provide a little of both.</p>
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>Git lives locally, on your computer</li>
+<li>GitHub lives remotely, on the Internet</li>
+<li>You can store and access your work online, on GitHub, but only if you EXPLICITLY SEND IT THERE &mdash; i.e via a <code>git push</code></li>
+<li>What you do locally on your computer doesn&rsquo;t just magically appear remotely online; you need to create the pathways and make the explicit commands</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/09/24/hello-world/">Hello World. It&#8217;s Stephanie.</a></h1>
     
     
@@ -133,6 +216,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/29/rails-in-15-minutes/">Rails in 15 Minutes</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/">5 Simple Tips/Lessons from Gem-Building</a>
       </li>
     
@@ -146,10 +233,6 @@
     
       <li class="post">
         <a href="/blog/2013/10/18/dot-zip-and-hash-are-really-handy/">.zip and Hash[] are Really Handy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/12/lost-in-translation-till-you-normalize/">Lost in Translation - &#8216;Till You Normalize</a>
       </li>
     
   </ul>
