@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: struct | stephanie writes code]]></title>
+  <link href="http://stephaniehoh.github.io/blog/categories/struct/atom.xml" rel="self"/>
+  <link href="http://stephaniehoh.github.io/"/>
+  <updated>2013-12-28T22:32:17-05:00</updated>
+  <id>http://stephaniehoh.github.io/</id>
+  <author>
+    <name><![CDATA[Stephanie Oh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Ruby 'Struct' Class]]></title>
+    <link href="http://stephaniehoh.github.io/blog/2013/12/28/the-ruby-struct-class/"/>
+    <updated>2013-12-28T22:29:00-05:00</updated>
+    <id>http://stephaniehoh.github.io/blog/2013/12/28/the-ruby-struct-class</id>
+    <content type="html"><![CDATA[<p>After months of hearing the book&rsquo;s name in mass circulation, I finally decided to get up close and personal with Sandi Metz' <em><a href="http://www.poodr.com">Practical Object-Oriented Design in Ruby</a></em>. I made this decision in part because the weeks leading up to Flatiron&rsquo;s graduation (Dec. 13th!) had been particularly Rails and JavaScript heavy, in part because this in turn had made me miss Ruby, and also in part because I felt it necessary to fortify my understanding of object-oriented programming best practices.</p>
+
+<p>Though I&rsquo;m still in the early chapters of POODR, I can already tell this is going to be a monumental asset not only to my understanding and appreciation of Ruby, but also to my sensibilities and skills as a programmer. Most laudably, it&rsquo;s just written so damn well. Maybe too well, as <a href="http://ortask.com/book-review-poodr/">one reviewer</a> has tellingly marveled:</p>
+
+<blockquote><p>&ldquo;I was rather surprised how, even though the book starts with simple examples, it quickly develops and builds on them to provide good explanations.&rdquo;</p></blockquote>
+
+<p>In other words, POODR is comprehensible, digestible, and accessible. As such, it&rsquo;s <em>actually</em> an effective learning tool. Shocking!</p>
+
+<p>Anyhow, the crux of this post is &mdash; in addition to praise for Metz' work &mdash; the Ruby <code>Struct</code> class. I came across this neat little &lsquo;class helper&rsquo;, if you will, for the first time in Chapter 2 of POODR.</p>
+
+<br>
+
+
+
+
+<h3>What is a Struct?</h3>
+
+
+<p>According to the official Ruby documentation, a <a href="http://ruby-doc.org/core/classes/Struct.html">Struct</a> is &ldquo;a convenient way to bundle a number of attributes together, using accessor methods, without having to write an explicit class.&rdquo; After playing around with it a bit in pry, it feels like a quick and cheap way to create <code>Class</code>-like instances on the fly that can possess both behaviors and qualities (much like regular <code>Class</code>es). Here&rsquo;s a sample <code>Struct</code> that I&rsquo;ll build out called <code>Person</code>:</p>
+
+<p>```ruby</p>
+
+<p>Person = Struct.new(:name, :age, :gender) do</p>
+
+<p>  def greet_world</p>
+
+<pre><code>"Hello world, my name is #{name}."
+</code></pre>
+
+<p>  end</p>
+
+<p>  def ask_question</p>
+
+<pre><code>"What is your favorite programming language?"
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<p>stephanie = Person.new(&ldquo;Stephanie&rdquo;, &ldquo;26&rdquo;, &ldquo;female&rdquo;)</p>
+
+<p>stephanie.name          # => &ldquo;Stephanie&rdquo;
+stephanie.age           # => &ldquo;26&rdquo;
+stephanie.gender        # => &ldquo;female&rdquo;</p>
+
+<p>stephanie.greet_world   # => &ldquo;Hello world, my name is Stephanie.&rdquo;
+stephanie.ask_question  # => &ldquo;What is your favorite programming language?&rdquo;</p>
+
+<p>```</p>
+
+<p>Cool, right? Remember, the symbols you pass to your new <code>Struct</code> upon initialization &mdash; in this case <code>:name</code>, <code>:age</code>, and <code>:gender</code> &mdash; act like regular <code>attr_accessor</code>s. So I could make some alterations after the matter, like so:</p>
+
+<p>```ruby</p>
+
+<p>stephanie.name = &ldquo;Ruby&rdquo;
+stephanie.age = &ldquo;21&rdquo;</p>
+
+<p>stephanie.greet_world   # => &ldquo;Hello world, my name is Ruby.&rdquo;</p>
+
+<p>```</p>
+
+<p>&hellip;but that might be a little confusing.</p>
+
+<p>I can now also make a bunch of new <code>Person</code>s, instantiating each one with his or her name/age/gender, and he or she will also respond to the <code>greet_world</code> and <code>ask_question</code> methods.</p>
+
+<br>
+
+
+
+
+<h3>When would you use a Struct?</h3>
+
+
+<p>This is a great question. It wasn&rsquo;t immediately clear to my why or when one would use a <code>Struct</code>, especially when the more ubiquitous <code>Class</code> is always an option. According to what I&rsquo;ve read so far in POODR, it seems that using a <code>Struct</code> is one way to separate structure from meaning; it plays nicely with <code>Class</code>es, and also helps to make your methods more transparent.</p>
+
+<p>If all of that sounded a bit vague and not yet super helpful, then it might help to look at another example wherein a <code>Struct</code> is used within a <code>Class</code> in order to break down method responsibilities and also make those methods more transparent:</p>
+
+<p>```ruby</p>
+
+<p>data = [[&ldquo;Stephanie&rdquo;, &ldquo;female&rdquo;], [&ldquo;Matz&rdquo;, &ldquo;male&rdquo;], [&ldquo;Sandi&rdquo;, &ldquo;female&rdquo;], [&ldquo;David&rdquo;, &ldquo;male&rdquo;],
+[&ldquo;Aaron&rdquo;, &ldquo;male&rdquo;]]</p>
+
+<p>class TransparentRoster
+  attr_accessor :participants</p>
+
+<p>  def initialize(data)</p>
+
+<pre><code>@participants = structify(data)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def sorted_names</p>
+
+<pre><code>participants.collect { |person| person.name }.sort
+</code></pre>
+
+<p>  end</p>
+
+<p>  def participant_list</p>
+
+<pre><code>puts "This year's participants include:"
+sorted_names.each { |name| puts name }
+</code></pre>
+
+<p>  end</p>
+
+<p>  # here&rsquo;s where we turn the 2D array of data into struct objects</p>
+
+<p>  Person = Struct.new(:name, :gender)</p>
+
+<p>  def structify(data)</p>
+
+<pre><code>data.collect { |pair| Person.new(pair[0], pair[1]) }
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<p>```</p>
+
+<p>The TransparentRoster <code>Class</code> above takes a parameter called &lsquo;data&rsquo; &mdash; in this case, that data is coming in the form of a 2-dimensional array. It is immediately dealt with upon initialization, calling on a method named <code>structify(data)</code> that turns each <code>[name, gender]</code> pair from the given array into <code>Struct</code> objects that can be further dealt with via the <code>:participants</code> attr_accessor, and which respond to both <code>.name</code> and <code>.gender</code>.</p>
+
+<p>In taking this approach, we were able to give the TransparentRoster class <em>mostly</em> the illusion of single-class responsibility (i.e technically, the Roster class shouldn&rsquo;t be responsible for, say, initializing new <code>Person</code>s; it should deal solely with duties that might sensibly pertain to a Roster like listing names, ordering them, etc). Furthermore, we were able to keep all of its methods small and single-purpose as well. Finally, the handling of raw data was kept limited to one place &mdash; the <code>structify(data)</code> method &mdash; so that if the given data were to change from a 2-dimensional array to a different structure, such as a hash, the code to extract the necessary data would only need to be altered in one place. All other method dependencies could remain relatively unharmed.</p>
+
+<p>I&rsquo;m curious to see in what other contexts and real-life code bases I might come across <code>Struct</code>s. So far, they seem like a great tool for managing single-class responsibility when you&rsquo;re not yet sure how many classes you ought to build or of what magnitude these classes should be for an evolving project. There&rsquo;s a lot left of POODR to read so maybe subsequent chapters will shed further light on this.</p>
+
+<br>
+
+
+
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>POODR is awesome.</li>
+<li>A <code>Struct</code> is a convenient way to bundle together attributes without having to build out or commit to building a whole <code>Class</code>.</li>
+<li><code>Struct</code>s can be included within <code>Class</code>es.</li>
+<li>If done so, a <code>Struct</code> can help illuminate the given <code>Class</code>&rsquo;s &lsquo;single purpose&rsquo; by handling the extraneous stuff; this also keeps the <code>Class</code>&rsquo;s methods short and sweet.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,7 @@
   <meta name="author" content="Stephanie Oh">
 
   
-  <meta name="description" content="It&rsquo;s been about 4 weeks since we began learning Rails, and two of those weeks we&rsquo;ve spent in manic project mode. Manic in a good way, of &hellip;">
+  <meta name="description" content="After months of hearing the book&rsquo;s name in mass circulation, I finally decided to get up close and personal with Sandi Metz&#8217; Practical &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,215 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/28/the-ruby-struct-class/">The Ruby &#8216;Struct&#8217; Class</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-28T22:29:00-05:00" pubdate data-updated="true">Dec 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After months of hearing the book&rsquo;s name in mass circulation, I finally decided to get up close and personal with Sandi Metz&#8217; <em><a href="http://www.poodr.com">Practical Object-Oriented Design in Ruby</a></em>. I made this decision in part because the weeks leading up to Flatiron&rsquo;s graduation (Dec. 13th!) had been particularly Rails and JavaScript heavy, in part because this in turn had made me miss Ruby, and also in part because I felt it necessary to fortify my understanding of object-oriented programming best practices.</p>
+
+<p>Though I&rsquo;m still in the early chapters of POODR, I can already tell this is going to be a monumental asset not only to my understanding and appreciation of Ruby, but also to my sensibilities and skills as a programmer. Most laudably, it&rsquo;s just written so damn well. Maybe too well, as <a href="http://ortask.com/book-review-poodr/">one reviewer</a> has tellingly marveled:</p>
+
+<blockquote><p>&ldquo;I was rather surprised how, even though the book starts with simple examples, it quickly develops and builds on them to provide good explanations.&rdquo;</p></blockquote>
+
+<p>In other words, POODR is comprehensible, digestible, and accessible. As such, it&rsquo;s <em>actually</em> an effective learning tool. Shocking!</p>
+
+<p>Anyhow, the crux of this post is &mdash; in addition to praise for Metz&#8217; work &mdash; the Ruby <code>Struct</code> class. I came across this neat little &lsquo;class helper&rsquo;, if you will, for the first time in Chapter 2 of POODR.</p>
+
+<br>
+
+
+
+
+<h3>What is a Struct?</h3>
+
+
+<p>According to the official Ruby documentation, a <a href="http://ruby-doc.org/core/classes/Struct.html">Struct</a> is &ldquo;a convenient way to bundle a number of attributes together, using accessor methods, without having to write an explicit class.&rdquo; After playing around with it a bit in pry, it feels like a quick and cheap way to create <code>Class</code>-like instances on the fly that can possess both behaviors and qualities (much like regular <code>Class</code>es). Here&rsquo;s a sample <code>Struct</code> that I&rsquo;ll build out called <code>Person</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Person</span> <span class="o">=</span> <span class="no">Struct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span><span class="p">,</span> <span class="ss">:gender</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greet_world</span>
+</span><span class='line'>    <span class="s2">&quot;Hello world, my name is </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">ask_question</span>
+</span><span class='line'>    <span class="s2">&quot;What is your favorite programming language?&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Stephanie&quot;</span><span class="p">,</span> <span class="s2">&quot;26&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">name</span>          <span class="c1"># =&gt; &quot;Stephanie&quot; </span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">age</span>           <span class="c1"># =&gt; &quot;26&quot;</span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">gender</span>        <span class="c1"># =&gt; &quot;female&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">greet_world</span>   <span class="c1"># =&gt; &quot;Hello world, my name is Stephanie.&quot;</span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">ask_question</span>  <span class="c1"># =&gt; &quot;What is your favorite programming language?&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cool, right? Remember, the symbols you pass to your new <code>Struct</code> upon initialization &mdash; in this case <code>:name</code>, <code>:age</code>, and <code>:gender</code> &mdash; act like regular <code>attr_accessor</code>s. So I could make some alterations after the matter, like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Ruby&quot;</span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="s2">&quot;21&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">greet_world</span>   <span class="c1"># =&gt; &quot;Hello world, my name is Ruby.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;but that might be a little confusing.</p>
+
+<p>I can now also make a bunch of new <code>Person</code>s, instantiating each one with his or her name/age/gender, and he or she will also respond to the <code>greet_world</code> and <code>ask_question</code> methods.</p>
+
+<br>
+
+
+
+
+<h3>When would you use a Struct?</h3>
+
+
+<p>This is a great question. It wasn&rsquo;t immediately clear to my why or when one would use a <code>Struct</code>, especially when the more ubiquitous <code>Class</code> is always an option. According to what I&rsquo;ve read so far in POODR, it seems that using a <code>Struct</code> is one way to separate structure from meaning; it plays nicely with <code>Class</code>es, and also helps to make your methods more transparent.</p>
+
+<p>If all of that sounded a bit vague and not yet super helpful, then it might help to look at another example wherein a <code>Struct</code> is used within a <code>Class</code> in order to break down method responsibilities and also make those methods more transparent:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">data</span> <span class="o">=</span> <span class="o">[[</span><span class="s2">&quot;Stephanie&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Matz&quot;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Sandi&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'><span class="o">[</span><span class="s2">&quot;Aaron&quot;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="o">]]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">TransparentRoster</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:participants</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@participants</span> <span class="o">=</span> <span class="n">structify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">sorted_names</span>
+</span><span class='line'>    <span class="n">participants</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">person</span><span class="o">|</span> <span class="n">person</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">participant_list</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;This year&#39;s participants include:&quot;</span>
+</span><span class='line'>    <span class="n">sorted_names</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="nb">puts</span> <span class="nb">name</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># here&#39;s where we turn the 2D array of data into struct objects</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">Person</span> <span class="o">=</span> <span class="no">Struct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:gender</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">structify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">pair</span><span class="o">|</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The TransparentRoster <code>Class</code> above takes a parameter called &lsquo;data&rsquo; &mdash; in this case, that data is coming in the form of a 2-dimensional array. It is immediately dealt with upon initialization, calling on a method named <code>structify(data)</code> that turns each <code>[name, gender]</code> pair from the given array into <code>Struct</code> objects that can be further dealt with via the <code>:participants</code> attr_accessor, and which respond to both <code>.name</code> and <code>.gender</code>.</p>
+
+<p>In taking this approach, we were able to give the TransparentRoster class <em>mostly</em> the illusion of single-class responsibility (i.e technically, the Roster class shouldn&rsquo;t be responsible for, say, initializing new <code>Person</code>s; it should deal solely with duties that might sensibly pertain to a Roster like listing names, ordering them, etc). Furthermore, we were able to keep all of its methods small and single-purpose as well. Finally, the handling of raw data was kept limited to one place &mdash; the <code>structify(data)</code> method &mdash; so that if the given data were to change from a 2-dimensional array to a different structure, such as a hash, the code to extract the necessary data would only need to be altered in one place. All other method dependencies could remain relatively unharmed.</p>
+
+<p>I&rsquo;m curious to see in what other contexts and real-life code bases I might come across <code>Struct</code>s. So far, they seem like a great tool for managing single-class responsibility when you&rsquo;re not yet sure how many classes you ought to build or of what magnitude these classes should be for an evolving project. There&rsquo;s a lot left of POODR to read so maybe subsequent chapters will shed further light on this.</p>
+
+<br>
+
+
+
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>POODR is awesome.</li>
+<li>A <code>Struct</code> is a convenient way to bundle together attributes without having to build out or commit to building a whole <code>Class</code>.</li>
+<li><code>Struct</code>s can be included within <code>Class</code>es.</li>
+<li>If done so, a <code>Struct</code> can help illuminate the given <code>Class</code>&rsquo;s &lsquo;single purpose&rsquo; by handling the extraneous stuff; this also keeps the <code>Class</code>&rsquo;s methods short and sweet.</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -497,115 +706,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/18/dot-zip-and-hash-are-really-handy/">.zip and Hash[] Are Really Handy</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-18T01:07:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We&rsquo;re wrapping up week 4 at the Flatiron School and&hellip; I&rsquo;m starting to work on a fun gem idea! Yes, I&rsquo;ve been inspired by my classmates to take the plunge and build my own Ruby gem.</p>
-
-<p>But first things first. I need data in order for my gem to be useful. So earlier today (well, yesterday, at this point) &mdash; I proceeded to scrape some data. And in the process, I discovered a neat pair of methods that work very nicely together: .zip and Hash[].</p>
-
-<h4>WHAT DOES .ZIP DO?</h4>
-
-
-<p>The .zip method basically joins two arrays together, pairing elements from each that have matching indexes and returning the whole thing as a big array that contains mini-arrays populated with the newly paired elements. You set one of the arrays as the receiver of the method, which then takes the second array as an argument. It looks something like this:</p>
-
-<p><code>array1.zip(array2)</code></p>
-
-<p>Not too complicated, right?</p>
-
-<p>Here it is in action:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array1</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
-</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">array1</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<br>
-
-
-
-
-<h4>WHAT DOES HASH[] DO?</h4>
-
-
-<p>The Hash[] class method is SO cool. You can basically dump the whole <code>array1.zip(array2)</code> sequence inside of the [brackets], like so:</p>
-
-<p><code>Hash[array1.zip(array2)]</code></p>
-
-<p>What do you think this will result in?</p>
-
-<p>Only one way to find out!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array1</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
-</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Hash</span><span class="o">[</span><span class="n">array1</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span><span class="o">]</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;3=&gt;banana&quot;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<br>
-
-
-<p>How crazy awesome is that?! It returned a hash and populated it with key-value pairs made out of the elements from each array that have matching index numbers.</p>
-
-<p>So the .zip and Hash[] methods, together, proved very useful indeed as I scraped data from Billboard.com and was able to get <code>artists</code> and <code>songs</code>, separately, to look like a numbered list of the pair, <code>artist - song</code>. And that&rsquo;s all I&rsquo;m saying about my gem-in-progress, for now!</p>
-
-<p>I &lt;3 Ruby.</p>
-
-<h4>KEY TAKEAWAYS</h4>
-
-
-<ol>
-<li>You can join two arrays together and return matching-index pairs using <code>array1.zip(array2)</code></li>
-<li>You can create a hash populated with key-value pairs made out of two arrays using <code>Hash[array1.zip(array2)]</code></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -621,6 +721,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/28/the-ruby-struct-class/">The Ruby &#8216;Struct&#8217; Class</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/29/rails-in-15-minutes/">Rails in 15 Minutes</a>
       </li>
     
@@ -634,10 +738,6 @@
     
       <li class="post">
         <a href="/blog/2013/10/31/easy-analogies-to-demistify-web-app-jargon/">Easy Analogies to Demistify Web Application Jargon</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/18/dot-zip-and-hash-are-really-handy/">.zip and Hash[] are Really Handy</a>
       </li>
     
   </ul>

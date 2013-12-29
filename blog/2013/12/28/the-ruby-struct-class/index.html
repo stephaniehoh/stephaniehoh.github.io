@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Ruby 'Struct' Class - stephanie writes code</title>
+  <meta name="author" content="Stephanie Oh">
+
+  
+  <meta name="description" content="After months of hearing the book&rsquo;s name in mass circulation, I finally decided to get up close and personal with Sandi Metz&#8217; Practical &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephaniehoh.github.io/blog/2013/12/28/the-ruby-struct-class">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="stephanie writes code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">stephanie writes code</a></h1>
+  
+    <h2>(For People Who Read English Good)</h2>
+  
+
+  <br>
+
+  <a href="https://twitter.com/SostephOh" target="_blank"><img src="/assets/icons/256/Twitter.png" height="40" width="40"></a>
+
+  <a href="https://github.com/stephaniehoh" target="_blank"><img src="/assets/icons/256/Gittub.png" height="40" width="40"></a>
+
+  <a href="http://www.linkedin.com/pub/stephanie-oh/22/537/389" target="_blank"><img src="/assets/icons/256/Linkedin.png" height="40" width="40"></a>
+
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:stephaniehoh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://flatironschool.com/" target="_blank">Flatiron School</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Ruby 'Struct' Class</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-28T22:29:00-05:00" pubdate data-updated="true">Dec 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>After months of hearing the book&rsquo;s name in mass circulation, I finally decided to get up close and personal with Sandi Metz&#8217; <em><a href="http://www.poodr.com">Practical Object-Oriented Design in Ruby</a></em>. I made this decision in part because the weeks leading up to Flatiron&rsquo;s graduation (Dec. 13th!) had been particularly Rails and JavaScript heavy, in part because this in turn had made me miss Ruby, and also in part because I felt it necessary to fortify my understanding of object-oriented programming best practices.</p>
+
+<p>Though I&rsquo;m still in the early chapters of POODR, I can already tell this is going to be a monumental asset not only to my understanding and appreciation of Ruby, but also to my sensibilities and skills as a programmer. Most laudably, it&rsquo;s just written so damn well. Maybe too well, as <a href="http://ortask.com/book-review-poodr/">one reviewer</a> has tellingly marveled:</p>
+
+<blockquote><p>&ldquo;I was rather surprised how, even though the book starts with simple examples, it quickly develops and builds on them to provide good explanations.&rdquo;</p></blockquote>
+
+<p>In other words, POODR is comprehensible, digestible, and accessible. As such, it&rsquo;s <em>actually</em> an effective learning tool. Shocking!</p>
+
+<p>Anyhow, the crux of this post is &mdash; in addition to praise for Metz&#8217; work &mdash; the Ruby <code>Struct</code> class. I came across this neat little &lsquo;class helper&rsquo;, if you will, for the first time in Chapter 2 of POODR.</p>
+
+<br>
+
+
+
+
+<h3>What is a Struct?</h3>
+
+
+<p>According to the official Ruby documentation, a <a href="http://ruby-doc.org/core/classes/Struct.html">Struct</a> is &ldquo;a convenient way to bundle a number of attributes together, using accessor methods, without having to write an explicit class.&rdquo; After playing around with it a bit in pry, it feels like a quick and cheap way to create <code>Class</code>-like instances on the fly that can possess both behaviors and qualities (much like regular <code>Class</code>es). Here&rsquo;s a sample <code>Struct</code> that I&rsquo;ll build out called <code>Person</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Person</span> <span class="o">=</span> <span class="no">Struct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span><span class="p">,</span> <span class="ss">:gender</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greet_world</span>
+</span><span class='line'>    <span class="s2">&quot;Hello world, my name is </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">ask_question</span>
+</span><span class='line'>    <span class="s2">&quot;What is your favorite programming language?&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Stephanie&quot;</span><span class="p">,</span> <span class="s2">&quot;26&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">name</span>          <span class="c1"># =&gt; &quot;Stephanie&quot; </span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">age</span>           <span class="c1"># =&gt; &quot;26&quot;</span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">gender</span>        <span class="c1"># =&gt; &quot;female&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">greet_world</span>   <span class="c1"># =&gt; &quot;Hello world, my name is Stephanie.&quot;</span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">ask_question</span>  <span class="c1"># =&gt; &quot;What is your favorite programming language?&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cool, right? Remember, the symbols you pass to your new <code>Struct</code> upon initialization &mdash; in this case <code>:name</code>, <code>:age</code>, and <code>:gender</code> &mdash; act like regular <code>attr_accessor</code>s. So I could make some alterations after the matter, like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Ruby&quot;</span>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="s2">&quot;21&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">stephanie</span><span class="o">.</span><span class="n">greet_world</span>   <span class="c1"># =&gt; &quot;Hello world, my name is Ruby.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;but that might be a little confusing.</p>
+
+<p>I can now also make a bunch of new <code>Person</code>s, instantiating each one with his or her name/age/gender, and he or she will also respond to the <code>greet_world</code> and <code>ask_question</code> methods.</p>
+
+<br>
+
+
+
+
+<h3>When would you use a Struct?</h3>
+
+
+<p>This is a great question. It wasn&rsquo;t immediately clear to my why or when one would use a <code>Struct</code>, especially when the more ubiquitous <code>Class</code> is always an option. According to what I&rsquo;ve read so far in POODR, it seems that using a <code>Struct</code> is one way to separate structure from meaning; it plays nicely with <code>Class</code>es, and also helps to make your methods more transparent.</p>
+
+<p>If all of that sounded a bit vague and not yet super helpful, then it might help to look at another example wherein a <code>Struct</code> is used within a <code>Class</code> in order to break down method responsibilities and also make those methods more transparent:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">data</span> <span class="o">=</span> <span class="o">[[</span><span class="s2">&quot;Stephanie&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Matz&quot;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Sandi&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'><span class="o">[</span><span class="s2">&quot;Aaron&quot;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="o">]]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">TransparentRoster</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:participants</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@participants</span> <span class="o">=</span> <span class="n">structify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">sorted_names</span>
+</span><span class='line'>    <span class="n">participants</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">person</span><span class="o">|</span> <span class="n">person</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">participant_list</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;This year&#39;s participants include:&quot;</span>
+</span><span class='line'>    <span class="n">sorted_names</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="nb">puts</span> <span class="nb">name</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># here&#39;s where we turn the 2D array of data into struct objects</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">Person</span> <span class="o">=</span> <span class="no">Struct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:gender</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">structify</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span> <span class="o">|</span><span class="n">pair</span><span class="o">|</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The TransparentRoster <code>Class</code> above takes a parameter called &lsquo;data&rsquo; &mdash; in this case, that data is coming in the form of a 2-dimensional array. It is immediately dealt with upon initialization, calling on a method named <code>structify(data)</code> that turns each <code>[name, gender]</code> pair from the given array into <code>Struct</code> objects that can be further dealt with via the <code>:participants</code> attr_accessor, and which respond to both <code>.name</code> and <code>.gender</code>.</p>
+
+<p>In taking this approach, we were able to give the TransparentRoster class <em>mostly</em> the illusion of single-class responsibility (i.e technically, the Roster class shouldn&rsquo;t be responsible for, say, initializing new <code>Person</code>s; it should deal solely with duties that might sensibly pertain to a Roster like listing names, ordering them, etc). Furthermore, we were able to keep all of its methods small and single-purpose as well. Finally, the handling of raw data was kept limited to one place &mdash; the <code>structify(data)</code> method &mdash; so that if the given data were to change from a 2-dimensional array to a different structure, such as a hash, the code to extract the necessary data would only need to be altered in one place. All other method dependencies could remain relatively unharmed.</p>
+
+<p>I&rsquo;m curious to see in what other contexts and real-life code bases I might come across <code>Struct</code>s. So far, they seem like a great tool for managing single-class responsibility when you&rsquo;re not yet sure how many classes you ought to build or of what magnitude these classes should be for an evolving project. There&rsquo;s a lot left of POODR to read so maybe subsequent chapters will shed further light on this.</p>
+
+<br>
+
+
+
+
+<h4>KEY TAKEAWAYS</h4>
+
+
+<ol>
+<li>POODR is awesome.</li>
+<li>A <code>Struct</code> is a convenient way to bundle together attributes without having to build out or commit to building a whole <code>Class</code>.</li>
+<li><code>Struct</code>s can be included within <code>Class</code>es.</li>
+<li>If done so, a <code>Struct</code> can help illuminate the given <code>Class</code>&rsquo;s &lsquo;single purpose&rsquo; by handling the extraneous stuff; this also keeps the <code>Class</code>&rsquo;s methods short and sweet.</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephanie Oh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-28T22:29:00-05:00" pubdate data-updated="true">Dec 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/poodr/'>POODR</a>, <a class='category' href='/blog/categories/classes/'>classes</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/struct/'>struct</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephaniehoh.github.io/blog/2013/12/28/the-ruby-struct-class/" data-via="SostephOh" data-counturl="http://stephaniehoh.github.io/blog/2013/12/28/the-ruby-struct-class/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/29/rails-in-15-minutes/" title="Previous Post: Rails in 15 Minutes">&laquo; Rails in 15 Minutes</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/28/the-ruby-struct-class/">The Ruby 'Struct' Class</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/29/rails-in-15-minutes/">Rails in 15 Minutes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/09/5-simple-tips-slash-lessons-from-gem-building/">5 Simple Tips/Lessons from Gem-Building</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/06/the-myth-of-i-cant-code/">The Myth of 'I Can't Code'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/31/easy-analogies-to-demistify-web-app-jargon/">Easy Analogies to Demistify Web Application Jargon</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/stephaniehoh">@stephaniehoh</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'stephaniehoh',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephanie Oh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
